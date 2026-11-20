@@ -1,0 +1,3349 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#070b14" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>برنامه‌ریز جامع دروس تا ددلاین (نسخه ۴ دور)</title>
+
+  <!-- فونت وزیرمتن (Vazirmatn) با وزن‌های ۳۰۰ تا ۹۰۰ و فونت‌های پشتیبان آفلاین -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <style>
+    /* =========================================================================
+       100% OFFLINE SELF-CONTAINED DARK GLASSMORPHISM DESIGN SYSTEM (RTL)
+       ========================================================================= */
+    :root {
+      --bg-base: #070b14;
+      --bg-surface: #0f172a;
+      --bg-surface-2: #162033;
+      --bg-input: #0a101f;
+      --border-subtle: rgba(51, 65, 85, 0.52);
+      --border-strong: rgba(71, 85, 105, 0.8);
+      --text-primary: #f8fafc;
+      --text-secondary: #cbd5e1;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+
+      --cyan: #22d3ee;
+      --cyan-bg: rgba(34, 211, 238, 0.13);
+      --cyan-border: rgba(34, 211, 238, 0.35);
+
+      --indigo: #818cf8;
+      --indigo-solid: #6366f1;
+      --indigo-bg: rgba(99, 102, 241, 0.15);
+      --indigo-border: rgba(99, 102, 241, 0.35);
+
+      --emerald: #34d399;
+      --emerald-solid: #10b981;
+      --emerald-bg: rgba(16, 185, 129, 0.14);
+      --emerald-border: rgba(16, 185, 129, 0.35);
+
+      --amber: #fbbf24;
+      --amber-solid: #f59e0b;
+      --amber-bg: rgba(245, 158, 11, 0.14);
+      --amber-border: rgba(245, 158, 11, 0.35);
+
+      --rose: #fb7185;
+      --rose-solid: #f43f5e;
+      --rose-bg: rgba(244, 63, 94, 0.14);
+      --rose-border: rgba(244, 63, 94, 0.35);
+
+      --violet: #a78bfa;
+      --violet-bg: rgba(139, 92, 246, 0.15);
+      --violet-border: rgba(139, 92, 246, 0.35);
+
+      --blue: #60a5fa;
+      --blue-bg: rgba(59, 130, 246, 0.15);
+      --blue-border: rgba(59, 130, 246, 0.35);
+
+      --radius-sm: 10px;
+      --radius-md: 14px;
+      --radius-lg: 18px;
+      --radius-xl: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      background-color: var(--bg-base);
+      color: var(--text-primary);
+      font-family: 'Vazirmatn', 'Tahoma', system-ui, -apple-system, sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      overscroll-behavior-y: none;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button, input, select, textarea {
+      font-family: 'Vazirmatn', 'Tahoma', system-ui, -apple-system, sans-serif;
+      color: inherit;
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    button:active {
+      transform: scale(0.97);
+    }
+
+    ::-webkit-scrollbar { width: 4px; height: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg-base); }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 999px; }
+
+    /* Mobile App Shell */
+    .app-shell {
+      max-width: 470px;
+      min-height: 100vh;
+      margin: 0 auto;
+      background: radial-gradient(circle at top left, rgba(34, 211, 238, 0.05), transparent 36%),
+                  radial-gradient(circle at top right, rgba(99, 102, 241, 0.06), transparent 36%),
+                  var(--bg-base);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    @media (min-width: 490px) {
+      .app-shell {
+        border-left: 1px solid rgba(30, 41, 59, 0.8);
+        border-right: 1px solid rgba(30, 41, 59, 0.8);
+        box-shadow: 0 25px 65px rgba(0, 0, 0, 0.72);
+      }
+    }
+
+    /* Sticky Top Header */
+    .app-header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: rgba(7, 11, 20, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(30, 41, 59, 0.85);
+      padding: 11px 14px;
+    }
+
+    .header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .brand-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 13px;
+      background: linear-gradient(135deg, #06b6d4, #6366f1, #8b5cf6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 22px rgba(99, 102, 241, 0.3);
+      flex-shrink: 0;
+      color: #fff;
+    }
+
+    .brand-text { min-width: 0; }
+
+    .brand-title {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .deadline-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      color: var(--text-muted);
+      padding: 1px 0;
+      transition: color 0.2s;
+    }
+    .deadline-trigger:hover { color: var(--cyan); }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .days-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 800;
+      border: 1px solid var(--cyan-border);
+      background: var(--cyan-bg);
+      color: var(--cyan);
+    }
+    .days-pill.overdue {
+      border-color: var(--rose-border);
+      background: var(--rose-bg);
+      color: var(--rose);
+    }
+
+    .pulse-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+      animation: pulse 1.8s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.35; transform: scale(0.8); }
+    }
+
+    .icon-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 11px;
+      background: rgba(30, 41, 59, 0.85);
+      border: 1px solid rgba(51, 65, 85, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-secondary);
+      transition: background 0.2s, color 0.2s;
+    }
+    .icon-btn:hover { background: rgba(51, 65, 85, 0.9); color: #fff; }
+
+    .sim-banner {
+      margin-top: 9px;
+      padding: 7px 10px;
+      border-radius: 12px;
+      background: var(--amber-bg);
+      border: 1px solid var(--amber-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 11px;
+      color: #fde68a;
+    }
+    .sim-banner.hidden { display: none; }
+    .sim-reset-btn {
+      padding: 4px 10px;
+      border-radius: 8px;
+      background: rgba(245, 158, 11, 0.3);
+      color: #fff;
+      font-size: 10.5px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* Main Content Area */
+    .main-content {
+      flex: 1;
+      padding: 14px 14px 102px 14px;
+    }
+
+    .stack-md > * + * { margin-top: 13px; }
+    .stack-sm > * + * { margin-top: 9px; }
+    .stack-xs > * + * { margin-top: 6px; }
+
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(7px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-tab { animation: fadeSlideUp 0.2s ease-out forwards; }
+
+    /* Glassmorphic Cards */
+    .card {
+      background: linear-gradient(145deg, rgba(17, 24, 39, 0.92), rgba(15, 23, 42, 0.78));
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      padding: 15px;
+      position: relative;
+      overflow: hidden;
+    }
+    .card-compact {
+      border-radius: var(--radius-lg);
+      padding: 12px 13px;
+    }
+    .card-done {
+      border-color: var(--emerald-border);
+      background: linear-gradient(145deg, rgba(6, 78, 59, 0.22), rgba(15, 23, 42, 0.82));
+      opacity: 0.84;
+    }
+
+    .glow-orb {
+      position: absolute;
+      top: -36px;
+      left: -36px;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(34, 211, 238, 0.18), transparent 70%);
+      pointer-events: none;
+    }
+
+    /* Typography Helpers */
+    .h2-title { font-size: 15.5px; font-weight: 800; color: #fff; }
+    .h3-title { font-size: 13.5px; font-weight: 800; color: #fff; }
+    .subtext { font-size: 11px; color: var(--text-muted); }
+    .text-xs { font-size: 12px; }
+    .text-xxs { font-size: 10px; }
+    .font-bold { font-weight: 700; }
+    .font-extrabold { font-weight: 800; }
+    .truncate { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .line-through { text-decoration: line-through; opacity: 0.65; }
+
+    /* Flex & Grid Helpers */
+    .flex-between { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .flex-start { display: flex; align-items: flex-start; gap: 11px; }
+    .flex-center { display: flex; align-items: center; justify-content: center; gap: 7px; }
+    .flex-wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 5px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 9px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; }
+
+    /* Badges & Pills */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 8px;
+      border-radius: 8px;
+      font-size: 10px;
+      font-weight: 700;
+      border: 1px solid transparent;
+      white-space: nowrap;
+    }
+    .badge-cyan { background: var(--cyan-bg); border-color: var(--cyan-border); color: var(--cyan); }
+    .badge-indigo { background: var(--indigo-bg); border-color: var(--indigo-border); color: var(--indigo); }
+    .badge-emerald { background: var(--emerald-bg); border-color: var(--emerald-border); color: var(--emerald); }
+    .badge-amber { background: var(--amber-bg); border-color: var(--amber-border); color: var(--amber); }
+    .badge-rose { background: var(--rose-bg); border-color: var(--rose-border); color: var(--rose); }
+    .badge-violet { background: var(--violet-bg); border-color: var(--violet-border); color: var(--violet); }
+    .badge-blue { background: var(--blue-bg); border-color: var(--blue-border); color: var(--blue); }
+
+    .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+    .dot-cyan { background: var(--cyan); }
+    .dot-indigo { background: var(--indigo); }
+    .dot-emerald { background: var(--emerald); }
+    .dot-amber { background: var(--amber); }
+    .dot-rose { background: var(--rose); }
+    .dot-violet { background: var(--violet); }
+    .dot-blue { background: var(--blue); }
+
+    /* Progress Bars */
+    .progress-track {
+      width: 100%;
+      height: 8px;
+      border-radius: 999px;
+      background: #1e293b;
+      overflow: hidden;
+    }
+    .progress-track-sm { height: 6px; }
+    .progress-fill {
+      height: 100%;
+      border-radius: 999px;
+      transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .fill-grad { background: linear-gradient(270deg, #22d3ee, #6366f1, #10b981); }
+    .fill-cyan { background: #06b6d4; }
+    .fill-indigo { background: #6366f1; }
+    .fill-emerald { background: #10b981; }
+    .fill-amber { background: #f59e0b; }
+    .fill-rose { background: #f43f5e; }
+    .fill-violet { background: #8b5cf6; }
+    .fill-blue { background: #3b82f6; }
+
+    /* Stat Mini Box */
+    .stat-box {
+      background: rgba(7, 11, 20, 0.65);
+      border: 1px solid rgba(30, 41, 59, 0.72);
+      border-radius: 13px;
+      padding: 8px 6px;
+      text-align: center;
+    }
+    .stat-label { font-size: 10px; color: var(--text-muted); }
+    .stat-val { font-size: 12px; font-weight: 800; color: #fff; margin-top: 2px; }
+
+    /* Segmented Control (3-column for Roadmap/Calendar/Weekly) */
+    .segmented-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4px;
+      padding: 4px;
+      border-radius: 16px;
+      background: #0d1424;
+      border: 1px solid rgba(30, 41, 59, 0.9);
+    }
+    .seg-btn {
+      padding: 9px 4px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      transition: all 0.2s;
+      text-align: center;
+    }
+    .seg-btn.active {
+      background: linear-gradient(270deg, #06b6d4, #4f46e5);
+      color: #fff;
+      box-shadow: 0 5px 16px rgba(79, 70, 229, 0.3);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 10px 14px;
+      border-radius: 13px;
+      font-size: 12px;
+      font-weight: 700;
+      transition: opacity 0.2s, background 0.2s, transform 0.12s;
+    }
+    .btn-primary {
+      background: linear-gradient(270deg, #06b6d4, #4f46e5);
+      color: #fff;
+      box-shadow: 0 8px 18px rgba(79, 70, 229, 0.25);
+    }
+    .btn-amber {
+      background: linear-gradient(270deg, #f59e0b, #f43f5e);
+      color: #090d16;
+      font-weight: 800;
+    }
+    .btn-emerald {
+      background: var(--emerald-bg);
+      border: 1px solid var(--emerald-border);
+      color: var(--emerald);
+    }
+    .btn-indigo {
+      background: var(--indigo-bg);
+      border: 1px solid var(--indigo-border);
+      color: var(--indigo);
+    }
+    .btn-rose {
+      background: var(--rose-bg);
+      border: 1px solid var(--rose-border);
+      color: var(--rose);
+    }
+    .btn-rose-solid { background: var(--rose-solid); color: #fff; }
+    .btn-ghost {
+      background: rgba(30, 41, 59, 0.85);
+      border: 1px solid rgba(51, 65, 85, 0.7);
+      color: var(--text-secondary);
+    }
+    .btn-dashed {
+      width: 100%;
+      padding: 9px;
+      border-radius: 13px;
+      border: 1px dashed rgba(71, 85, 105, 0.9);
+      color: var(--cyan);
+      font-size: 11.5px;
+      font-weight: 700;
+      background: rgba(34, 211, 238, 0.04);
+    }
+    .btn-dashed:hover { border-color: var(--cyan); background: rgba(34, 211, 238, 0.09); }
+    .btn-sm { padding: 6px 10px; border-radius: 10px; font-size: 11px; }
+    .btn-full { width: 100%; }
+
+    /* Check Button */
+    .check-box {
+      width: 28px;
+      height: 28px;
+      border-radius: 10px;
+      border: 2px solid #475569;
+      background: rgba(15, 23, 42, 0.85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+      transition: all 0.2s;
+      color: #070b14;
+    }
+    .check-box.checked {
+      background: var(--emerald-solid);
+      border-color: var(--emerald-solid);
+    }
+
+    .task-footer {
+      margin-top: 9px;
+      padding-top: 9px;
+      border-top: 1px solid rgba(30, 41, 59, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    /* Exam Highlight Banner */
+    .exam-banner {
+      background: linear-gradient(270deg, rgba(245, 158, 11, 0.2), rgba(244, 63, 94, 0.13));
+      border: 1px solid rgba(245, 158, 11, 0.45);
+      border-radius: var(--radius-xl);
+      padding: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .alert-box {
+      padding: 9px 12px;
+      border-radius: 13px;
+      font-size: 11px;
+      line-height: 1.7;
+    }
+    .alert-amber {
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.32);
+      color: #fde68a;
+    }
+    .alert-emerald {
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.32);
+      color: #a7f3d0;
+    }
+    .alert-cyan {
+      background: rgba(34, 211, 238, 0.1);
+      border: 1px solid rgba(34, 211, 238, 0.28);
+      color: #cffafe;
+    }
+
+    /* Inner Item Row */
+    .inner-row {
+      padding: 10px 12px;
+      border-radius: 15px;
+      background: rgba(7, 11, 20, 0.72);
+      border: 1px solid rgba(30, 41, 59, 0.85);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    /* =========================================================================
+       MONTHLY JALALI CALENDAR STYLES
+       ========================================================================= */
+    .cal-weekdays {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 4px;
+      margin-bottom: 6px;
+      text-align: center;
+      font-size: 10px;
+      font-weight: 800;
+      color: var(--text-muted);
+    }
+    .cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 4px;
+    }
+    .cal-cell {
+      min-height: 54px;
+      border-radius: 12px;
+      padding: 4px 2px;
+      background: rgba(7, 11, 20, 0.68);
+      border: 1px solid rgba(30, 41, 59, 0.75);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      transition: all 0.15s;
+    }
+    .cal-cell.empty {
+      background: transparent;
+      border-color: transparent;
+      pointer-events: none;
+    }
+    .cal-cell.outside {
+      opacity: 0.36;
+    }
+    .cal-cell.is-today {
+      border-color: var(--cyan);
+      box-shadow: inset 0 0 0 1px rgba(34, 211, 238, 0.4);
+    }
+    .cal-cell.is-deadline {
+      border-color: var(--rose);
+      background: rgba(244, 63, 94, 0.12);
+    }
+    .cal-cell.selected {
+      background: rgba(99, 102, 241, 0.25);
+      border-color: #fff;
+      transform: scale(1.03);
+      z-index: 2;
+    }
+    .cal-day-num {
+      font-size: 11px;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.2;
+    }
+    .cal-pages-tag {
+      font-size: 9px;
+      font-weight: 700;
+      padding: 1px 4px;
+      border-radius: 5px;
+      line-height: 1.2;
+    }
+    .cal-indicators {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      min-height: 7px;
+    }
+    .cal-pass-bar {
+      width: 16px;
+      height: 3px;
+      border-radius: 99px;
+    }
+
+    /* Roadmap Timeline */
+    .timeline-wrap {
+      position: relative;
+      padding-right: 18px;
+    }
+    .timeline-line {
+      position: absolute;
+      top: 8px;
+      bottom: 8px;
+      right: 5px;
+      width: 2px;
+      background: linear-gradient(180deg, #22d3ee, #6366f1, #f59e0b, #10b981);
+      border-radius: 99px;
+    }
+    .timeline-node {
+      position: relative;
+      margin-bottom: 10px;
+    }
+    .timeline-node:last-child { margin-bottom: 0; }
+    .timeline-dot {
+      position: absolute;
+      right: -18px;
+      top: 14px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: 2px solid var(--bg-base);
+    }
+
+    /* Form Controls */
+    .form-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+    }
+    .form-input, .form-select {
+      width: 100%;
+      padding: 10px 13px;
+      border-radius: 13px;
+      background: var(--bg-input);
+      border: 1px solid #334155;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-input:focus, .form-select:focus { border-color: var(--cyan); }
+
+    /* Custom Jalali Date Picker Component */
+    .jalali-picker {
+      background: rgba(7, 11, 20, 0.78);
+      border: 1px solid rgba(51, 65, 85, 0.85);
+      border-radius: 16px;
+      padding: 11px;
+    }
+    .jalali-picker-grid {
+      display: grid;
+      grid-template-columns: 0.85fr 1.35fr 1fr;
+      gap: 7px;
+    }
+    .jalali-picker-col label {
+      display: block;
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+      text-align: center;
+      font-weight: 700;
+    }
+    .jalali-picker-col select {
+      width: 100%;
+      padding: 8px 5px;
+      border-radius: 11px;
+      background: #111827;
+      border: 1px solid #334155;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      text-align: center;
+      outline: none;
+    }
+    .jalali-picker-col select:focus { border-color: var(--cyan); }
+    .jalali-preview {
+      margin-top: 9px;
+      padding: 6px 10px;
+      border-radius: 10px;
+      background: rgba(34, 211, 238, 0.09);
+      border: 1px solid rgba(34, 211, 238, 0.22);
+      text-align: center;
+      font-size: 11.5px;
+      font-weight: 800;
+      color: var(--cyan);
+    }
+    .jalali-presets {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 5px;
+      margin-top: 8px;
+    }
+    .preset-chip {
+      padding: 6px 4px;
+      border-radius: 9px;
+      background: rgba(30, 41, 59, 0.85);
+      border: 1px solid rgba(51, 65, 85, 0.7);
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text-secondary);
+      text-align: center;
+    }
+    .preset-chip:hover { border-color: var(--cyan); color: var(--cyan); }
+
+    /* Bottom Navigation Bar (5 Tabs) */
+    .bottom-nav-wrap {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 30;
+    }
+    .bottom-nav {
+      max-width: 470px;
+      margin: 0 auto;
+      background: rgba(7, 11, 20, 0.94);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-top: 1px solid rgba(30, 41, 59, 0.92);
+      padding: 7px 6px calc(7px + env(safe-area-inset-bottom, 0px)) 6px;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 2px;
+    }
+    .nav-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      padding: 6px 2px;
+      border-radius: 12px;
+      color: var(--text-muted);
+      font-size: 9.5px;
+      font-weight: 700;
+      transition: all 0.2s;
+    }
+    .nav-btn.active {
+      color: var(--cyan);
+      background: rgba(34, 211, 238, 0.12);
+    }
+
+    /* Modal / Bottom Sheet */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      background: rgba(2, 6, 23, 0.8);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+    }
+    .modal-backdrop.open { display: flex; }
+    @media (min-width: 490px) {
+      .modal-backdrop { align-items: center; padding: 16px; }
+    }
+    .modal-box {
+      width: 100%;
+      max-width: 470px;
+      max-height: 90vh;
+      overflow-y: auto;
+      background: #0f172a;
+      border-top: 1px solid rgba(71, 85, 105, 0.8);
+      border-radius: 24px 24px 0 0;
+      padding: 18px;
+      box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.65);
+    }
+    @media (min-width: 490px) {
+      .modal-box { border: 1px solid rgba(71, 85, 105, 0.8); border-radius: 24px; }
+    }
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    /* Toast Notifications */
+    .toast-container {
+      position: fixed;
+      top: 66px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 60;
+      width: 92%;
+      max-width: 400px;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    .toast {
+      padding: 10px 14px;
+      border-radius: 13px;
+      font-size: 12px;
+      font-weight: 700;
+      text-align: center;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+      transition: all 0.25s ease;
+    }
+    .toast-success { background: rgba(6, 78, 59, 0.94); border: 1px solid var(--emerald-border); color: #a7f3d0; }
+    .toast-error   { background: rgba(136, 19, 55, 0.94); border: 1px solid var(--rose-border); color: #fecdd3; }
+    .toast-info    { background: rgba(15, 23, 42, 0.96); border: 1px solid var(--cyan-border); color: #cffafe; }
+
+    /* Circular Ring */
+    .ring-wrap {
+      position: relative;
+      width: 118px;
+      height: 118px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .ring-svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+    .ring-center {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .color-chip {
+      padding: 6px 11px;
+      border-radius: 10px;
+      font-size: 11px;
+      font-weight: 700;
+      border: 1px solid transparent;
+      opacity: 0.62;
+      transition: all 0.15s;
+    }
+    .color-chip.selected {
+      opacity: 1;
+      box-shadow: 0 0 0 2px #fff;
+      transform: scale(1.04);
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Sticky Top Header -->
+    <header class="app-header">
+      <div class="header-row">
+        <div class="brand">
+          <div class="brand-icon" aria-hidden="true">
+            <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+          </div>
+          <div class="brand-text">
+            <div class="brand-title">برنامه‌ریز جامع دروس (۴ دور)</div>
+            <button onclick="openDeadlineModal()" class="deadline-trigger" title="تغییر ددلاین شمسی">
+              <span id="header-deadline-text">ددلاین: ...</span>
+              <svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="header-actions">
+          <button onclick="openDeadlineModal()" id="header-days-badge" class="days-pill">
+            <span class="pulse-dot"></span>
+            <span id="header-days-left">... روز</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Simulation Banner -->
+      <div id="sim-banner" class="sim-banner hidden">
+        <span id="sim-banner-text" class="truncate font-bold">حالت شبیه‌سازی تاریخ فعال است</span>
+        <button onclick="resetSimulatedDate()" class="sim-reset-btn">بازگشت به امروز واقعی</button>
+      </div>
+    </header>
+
+    <!-- Main Dynamic View -->
+    <main id="main-content" class="main-content"></main>
+
+    <!-- Bottom Navigation (5 Tabs) -->
+    <nav class="bottom-nav-wrap">
+      <div class="bottom-nav">
+        <button onclick="switchTab('today')" data-tab="today" class="nav-btn">
+          <svg width="19" height="19" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span>امروز</span>
+        </button>
+
+        <button onclick="switchTab('calendar')" data-tab="calendar" class="nav-btn">
+          <svg width="19" height="19" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+          <span>تقویم و نقشه</span>
+        </button>
+
+        <button onclick="switchTab('courses')" data-tab="courses" class="nav-btn">
+          <svg width="19" height="19" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+          </svg>
+          <span>دروس و منابع</span>
+        </button>
+
+        <button onclick="switchTab('exams')" data-tab="exams" class="nav-btn">
+          <svg width="19" height="19" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+          </svg>
+          <span>آزمون‌ها</span>
+        </button>
+
+        <button onclick="switchTab('settings')" data-tab="settings" class="nav-btn">
+          <svg width="19" height="19" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z" />
+          </svg>
+          <span>آمار و تنظیم</span>
+        </button>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Reusable Bottom Sheet / Modal -->
+  <div id="modal-backdrop" class="modal-backdrop">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="modal-title" class="h2-title">عنوان</h3>
+        <button onclick="closeModal()" class="icon-btn" aria-label="بستن">
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Hidden File Input for Offline JSON Backup Restore -->
+  <input type="file" id="import-file-input" accept=".json,application/json" style="display:none" onchange="handleImportFile(event)" />
+
+  <script>
+    /*************************************************************************
+     * 1. EXACT OFFLINE SOLAR HIJRI (JALALI / هجری شمسی) CALENDAR ENGINE
+     *    Full leap-year precision, JDN conversions, Saturday-to-Friday grid.
+     *************************************************************************/
+    const JALALI_MONTHS = [
+      'فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور',
+      'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'
+    ];
+
+    // JDN % 7 === 0 => دوشنبه (Monday)
+    const JALALI_WEEKDAYS_FROM_JDN = [
+      'دوشنبه', 'سه‌شنبه', 'چهارشنبه', 'پنج‌شنبه', 'جمعه', 'شنبه', 'یک‌شنبه'
+    ];
+
+    // Persian calendar grid order: شنبه (0) .. جمعه (6)
+    const JALALI_WEEKDAY_SHORT = ['ش', 'ی', 'د', 'س', 'چ', 'پ', 'ج'];
+
+    function divInt(a, b) { return ~~(a / b); }
+    function modInt(a, b) { return a - ~~(a / b) * b; }
+
+    function jalCal(jy) {
+      const breaks = [-61, 9, 38, 199, 426, 686, 756, 818, 1111, 1181, 1210, 1635, 2060, 2097, 2192, 2262, 2324, 2394, 2456, 3178];
+      const bl = breaks.length;
+      const gy = jy + 621;
+      let leapJ = -14;
+      let jp = breaks[0];
+      let jm, jump = 0, leap, n, i;
+
+      for (i = 1; i < bl; i += 1) {
+        jm = breaks[i];
+        jump = jm - jp;
+        if (jy < jm) break;
+        leapJ = leapJ + divInt(jump, 33) * 8 + divInt(modInt(jump, 33), 4);
+        jp = jm;
+      }
+      n = jy - jp;
+      leapJ = leapJ + divInt(n, 33) * 8 + divInt(modInt(n, 33) + 3, 4);
+      if (modInt(jump, 33) === 4 && jump - n === 4) leapJ += 1;
+
+      const leapG = divInt(gy, 4) - divInt((divInt(gy, 100) + 1) * 3, 4) - 150;
+      const march = 20 + leapJ - leapG;
+
+      if (jump - n < 6) n = n - jump + divInt(jump + 4, 33) * 33;
+      leap = modInt(modInt(n + 1, 33) - 1, 4);
+      if (leap === -1) leap = 4;
+
+      return { leap, gy, march };
+    }
+
+    function g2d(gy, gm, gd) {
+      let d = divInt((gy + divInt(gm - 8, 6) + 100100) * 1461, 4)
+        + divInt(153 * modInt(gm + 9, 12) + 2, 5)
+        + gd - 34840408;
+      d = d - divInt(divInt(gy + 100100 + divInt(gm - 8, 6), 100) * 3, 4) + 752;
+      return d;
+    }
+
+    function d2g(jdn) {
+      let j = 4 * jdn + 139361631;
+      j = j + divInt(divInt(4 * jdn + 183187720, 146097) * 3, 4) * 4 - 3908;
+      const i = divInt(modInt(j, 1461), 4) * 5 + 308;
+      const gd = divInt(modInt(i, 153), 5) + 1;
+      const gm = modInt(divInt(i, 153), 12) + 1;
+      const gy = divInt(j, 1461) - 100100 + divInt(8 - gm, 6);
+      return { gy, gm, gd };
+    }
+
+    function j2d(jy, jm, jd) {
+      const r = jalCal(jy);
+      return g2d(r.gy, 3, r.march) + (jm - 1) * 31 - divInt(jm, 7) * (jm - 7) + jd - 1;
+    }
+
+    function d2j(jdn) {
+      const gy = d2g(jdn).gy;
+      let jy = gy - 621;
+      const r = jalCal(jy);
+      const jdn1f = g2d(gy, 3, r.march);
+      let k = jdn - jdn1f;
+      let jm, jd;
+      if (k >= 0) {
+        if (k <= 185) {
+          jm = 1 + divInt(k, 31);
+          jd = modInt(k, 31) + 1;
+          return { jy, jm, jd };
+        } else {
+          k -= 186;
+        }
+      } else {
+        jy -= 1;
+        k += 179;
+        if (r.leap === 1) k += 1;
+      }
+      jm = 7 + divInt(k, 30);
+      jd = modInt(k, 30) + 1;
+      return { jy, jm, jd };
+    }
+
+    function isLeapJalaliYear(jy) { return jalCal(jy).leap === 0; }
+
+    function jalaliMonthLength(jy, jm) {
+      if (jm <= 6) return 31;
+      if (jm <= 11) return 30;
+      return isLeapJalaliYear(jy) ? 30 : 29;
+    }
+
+    /** Returns Saturday=0, Sunday=1, ..., Friday=6 for any JDN */
+    function persianWeekdayIndex(jdn) {
+      // JDN % 7: 0=Mon(2), 1=Tue(3), 2=Wed(4), 3=Thu(5), 4=Fri(6), 5=Sat(0), 6=Sun(1)
+      return (((jdn % 7) + 7) % 7 + 2) % 7;
+    }
+
+    function toJalaliKey(jy, jm, jd) {
+      return `${String(jy).padStart(4, '0')}-${String(jm).padStart(2, '0')}-${String(jd).padStart(2, '0')}`;
+    }
+
+    function parseJalaliKey(jKey) {
+      const parts = String(jKey || '').split('-').map(Number);
+      if (parts.length !== 3 || parts.some(isNaN)) return getRealTodayJalaliObj();
+      if (parts[0] > 1700) return d2j(g2d(parts[0], parts[1], parts[2]));
+      return { jy: parts[0], jm: parts[1], jd: parts[2] };
+    }
+
+    function jalaliKeyToJDN(jKey) {
+      const { jy, jm, jd } = parseJalaliKey(jKey);
+      return j2d(jy, jm, jd);
+    }
+
+    function getRealTodayJalaliObj() {
+      const now = new Date();
+      return d2j(g2d(now.getFullYear(), now.getMonth() + 1, now.getDate()));
+    }
+
+    function getRealTodayJKey() {
+      const { jy, jm, jd } = getRealTodayJalaliObj();
+      return toJalaliKey(jy, jm, jd);
+    }
+
+    function getActiveJKey() {
+      return state.settings.simulatedDate || getRealTodayJKey();
+    }
+
+    function addDaysJalali(jKey, daysToAdd) {
+      const { jy, jm, jd } = d2j(jalaliKeyToJDN(jKey) + daysToAdd);
+      return toJalaliKey(jy, jm, jd);
+    }
+
+    function diffDaysJalaliInclusive(startJKey, endJKey) {
+      return (jalaliKeyToJDN(endJKey) - jalaliKeyToJDN(startJKey)) + 1;
+    }
+
+    function toFaNum(val) {
+      const digits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+      return String(val).replace(/\d/g, d => digits[Number(d)]);
+    }
+
+    function formatJalaliDisplay(jKey, includeWeekday = false) {
+      const { jy, jm, jd } = parseJalaliKey(jKey);
+      const monthName = JALALI_MONTHS[jm - 1] || '';
+      const base = `${toFaNum(jd)} ${monthName} ${toFaNum(jy)}`;
+      if (!includeWeekday) return base;
+      const jdn = j2d(jy, jm, jd);
+      const weekday = JALALI_WEEKDAYS_FROM_JDN[((jdn % 7) + 7) % 7];
+      return `${weekday} ${base}`;
+    }
+
+    function formatJalaliShort(jKey) {
+      const { jm, jd } = parseJalaliKey(jKey);
+      return `${toFaNum(jd)} ${JALALI_MONTHS[jm - 1]}`;
+    }
+
+    function normalizeToJalaliKey(dateStr, fallbackKey) {
+      if (!dateStr || typeof dateStr !== 'string') return fallbackKey;
+      const parts = dateStr.split('-').map(Number);
+      if (parts.length !== 3 || parts.some(isNaN)) return fallbackKey;
+      if (parts[0] > 1700) {
+        const j = d2j(g2d(parts[0], parts[1], parts[2]));
+        return toJalaliKey(j.jy, j.jm, j.jd);
+      }
+      const m = Math.min(12, Math.max(1, parts[1]));
+      const maxD = jalaliMonthLength(parts[0], m);
+      return toJalaliKey(parts[0], m, Math.min(maxD, Math.max(1, parts[2])));
+    }
+
+    /*************************************************************************
+     * 2. CUSTOM MOBILE JALALI DATE PICKER (WITH QUICK PRESETS)
+     *************************************************************************/
+    function renderJalaliPickerHTML(pickerId, initialJKey, showQuickPresets = false) {
+      const { jy, jm, jd } = parseJalaliKey(initialJKey);
+      const todayYear = getRealTodayJalaliObj().jy;
+      const startYear = Math.min(todayYear, jy) - 1;
+      const endYear = Math.max(todayYear + 6, jy + 2);
+
+      let yearOpts = '';
+      for (let y = startYear; y <= endYear; y++) {
+        yearOpts += `<option value="${y}" ${y === jy ? 'selected' : ''}>${toFaNum(y)}</option>`;
+      }
+      let monthOpts = '';
+      for (let m = 1; m <= 12; m++) {
+        monthOpts += `<option value="${m}" ${m === jm ? 'selected' : ''}>${JALALI_MONTHS[m - 1]}</option>`;
+      }
+      const maxDays = jalaliMonthLength(jy, jm);
+      let dayOpts = '';
+      for (let d = 1; d <= maxDays; d++) {
+        dayOpts += `<option value="${d}" ${d === jd ? 'selected' : ''}>${toFaNum(d)}</option>`;
+      }
+
+      const presetsHtml = showQuickPresets ? `
+        <div class="jalali-presets">
+          <button type="button" class="preset-chip" onclick="setJalaliPickerValue('${pickerId}', '1405-12-09')">۹ اسفند ۱۴۰۵</button>
+          <button type="button" class="preset-chip" onclick="setJalaliPickerValue('${pickerId}', '1406-03-31')">آخر خرداد ۱۴۰۶</button>
+          <button type="button" class="preset-chip" onclick="setJalaliPickerValue('${pickerId}', '1406-12-29')">آخر اسفند ۱۴۰۶</button>
+        </div>
+      ` : '';
+
+      return `
+        <div class="jalali-picker" data-picker="${pickerId}">
+          <div class="jalali-picker-grid">
+            <div class="jalali-picker-col">
+              <label for="${pickerId}-day">روز</label>
+              <select id="${pickerId}-day" onchange="onJalaliPickerChange('${pickerId}')">${dayOpts}</select>
+            </div>
+            <div class="jalali-picker-col">
+              <label for="${pickerId}-month">ماه</label>
+              <select id="${pickerId}-month" onchange="onJalaliPickerChange('${pickerId}')">${monthOpts}</select>
+            </div>
+            <div class="jalali-picker-col">
+              <label for="${pickerId}-year">سال</label>
+              <select id="${pickerId}-year" onchange="onJalaliPickerChange('${pickerId}')">${yearOpts}</select>
+            </div>
+          </div>
+          <div id="${pickerId}-preview" class="jalali-preview">
+            ${formatJalaliDisplay(toJalaliKey(jy, jm, jd), true)}
+          </div>
+          ${presetsHtml}
+        </div>
+      `;
+    }
+
+    function onJalaliPickerChange(pickerId) {
+      const yEl = document.getElementById(`${pickerId}-year`);
+      const mEl = document.getElementById(`${pickerId}-month`);
+      const dEl = document.getElementById(`${pickerId}-day`);
+      if (!yEl || !mEl || !dEl) return;
+
+      const jy = parseInt(yEl.value, 10);
+      const jm = parseInt(mEl.value, 10);
+      let jd = parseInt(dEl.value, 10);
+      const maxDays = jalaliMonthLength(jy, jm);
+
+      if (dEl.options.length !== maxDays) {
+        if (jd > maxDays) jd = maxDays;
+        let opts = '';
+        for (let d = 1; d <= maxDays; d++) {
+          opts += `<option value="${d}" ${d === jd ? 'selected' : ''}>${toFaNum(d)}</option>`;
+        }
+        dEl.innerHTML = opts;
+      }
+
+      const key = toJalaliKey(jy, jm, jd);
+      const prevEl = document.getElementById(`${pickerId}-preview`);
+      if (prevEl) prevEl.textContent = formatJalaliDisplay(key, true);
+    }
+
+    function getJalaliPickerValue(pickerId) {
+      const yEl = document.getElementById(`${pickerId}-year`);
+      const mEl = document.getElementById(`${pickerId}-month`);
+      const dEl = document.getElementById(`${pickerId}-day`);
+      if (!yEl || !mEl || !dEl) return null;
+      const jy = parseInt(yEl.value, 10);
+      const jm = parseInt(mEl.value, 10);
+      const jd = Math.min(jalaliMonthLength(jy, jm), parseInt(dEl.value, 10));
+      return toJalaliKey(jy, jm, jd);
+    }
+
+    function setJalaliPickerValue(pickerId, targetJKey) {
+      const { jy, jm, jd } = parseJalaliKey(targetJKey);
+      const yEl = document.getElementById(`${pickerId}-year`);
+      const mEl = document.getElementById(`${pickerId}-month`);
+      const dEl = document.getElementById(`${pickerId}-day`);
+      if (!yEl || !mEl || !dEl) return;
+
+      if (![...yEl.options].some(o => Number(o.value) === jy)) {
+        const opt = document.createElement('option');
+        opt.value = jy;
+        opt.textContent = toFaNum(jy);
+        yEl.appendChild(opt);
+      }
+      yEl.value = jy;
+      mEl.value = jm;
+      onJalaliPickerChange(pickerId);
+      dEl.value = Math.min(jalaliMonthLength(jy, jm), jd);
+      onJalaliPickerChange(pickerId);
+    }
+
+    /*************************************************************************
+     * 3. CONSTANTS, 4-PASS WEIGHTS & PERSISTENT STATE
+     *************************************************************************/
+    const STORAGE_KEY = 'smart_4pass_planner_v1';
+    const DEFAULT_DEADLINE_JALALI = '1405-12-09'; // ۹ اسفند ۱۴۰۵ (معادل پایان فوریه ۲۰۲۷)
+
+    const COURSE_COLORS = [
+      { id: 'cyan',    name: 'فیروزه‌ای', badge: 'badge-cyan',    dot: 'dot-cyan',    fill: 'fill-cyan',    textColor: 'var(--cyan)' },
+      { id: 'indigo',  name: 'نیلی',      badge: 'badge-indigo',  dot: 'dot-indigo',  fill: 'fill-indigo',  textColor: 'var(--indigo)' },
+      { id: 'emerald', name: 'زمردی',     badge: 'badge-emerald', dot: 'dot-emerald', fill: 'fill-emerald', textColor: 'var(--emerald)' },
+      { id: 'amber',   name: 'کهربایی',   badge: 'badge-amber',   dot: 'dot-amber',   fill: 'fill-amber',   textColor: 'var(--amber)' },
+      { id: 'rose',    name: 'رز',        badge: 'badge-rose',    dot: 'dot-rose',    fill: 'fill-rose',    textColor: 'var(--rose)' },
+      { id: 'violet',  name: 'بنفش',      badge: 'badge-violet',  dot: 'dot-violet',  fill: 'fill-violet',  textColor: 'var(--violet)' },
+      { id: 'blue',    name: 'آبی',       badge: 'badge-blue',    dot: 'dot-blue',    fill: 'fill-blue',    textColor: 'var(--blue)' }
+    ];
+
+    /**
+     * Weighted 4-Pass Model:
+     * Pass 0 (مطالعه اولیه): 45% of total time -> effort multiplier 1.80 per page
+     * Pass 1 (مرور اول):     25% of total time -> effort multiplier 1.00 per page
+     * Pass 2 (مرور دوم):     17% of total time -> effort multiplier 0.68 per page
+     * Pass 3 (مرور سوم):     13% of total time -> effort multiplier 0.52 per page
+     * Sum of time shares = 100% | Sum of effort multipliers = 4.00
+     */
+    const PASS_INFO = [
+      { index: 0, label: 'دور ۱: مطالعه اولیه', short: 'مطالعه', sharePct: 45, effort: 1.80, badgeClass: 'badge-cyan',    barClass: 'fill-cyan',    hex: '#22d3ee' },
+      { index: 1, label: 'دور ۲: مرور اول',     short: 'مرور ۱', sharePct: 25, effort: 1.00, badgeClass: 'badge-indigo',  barClass: 'fill-indigo',  hex: '#818cf8' },
+      { index: 2, label: 'دور ۳: مرور دوم',     short: 'مرور ۲', sharePct: 17, effort: 0.68, badgeClass: 'badge-amber',   barClass: 'fill-amber',   hex: '#fbbf24' },
+      { index: 3, label: 'دور ۴: مرور سوم',     short: 'مرور ۳', sharePct: 13, effort: 0.52, badgeClass: 'badge-emerald', barClass: 'fill-emerald', hex: '#34d399' }
+    ];
+
+    let state = {
+      settings: {
+        deadline: DEFAULT_DEADLINE_JALALI,
+        simulatedDate: null
+      },
+      courses: [],
+      exams: [],
+      dailyLogs: {} // { '1405-08-29': { [bookId]: pagesReadToday } }
+    };
+
+    // UI Navigation State
+    let activeTab = 'today'; // 'today' | 'calendar' | 'courses' | 'exams' | 'settings'
+    let calendarSubTab = 'roadmap'; // 'roadmap' | 'monthly' | 'weekly'
+    let calViewYear = null;
+    let calViewMonth = null;
+    let calSelectedDate = null;
+    let roadmapFilterBookId = 'all';
+
+    function uid(prefix = 'id') {
+      return `${prefix}_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`;
+    }
+
+    function getColorMeta(colorId) {
+      return COURSE_COLORS.find(c => c.id === colorId) || COURSE_COLORS[0];
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function getStarterSampleCourses() {
+      return [
+        {
+          id: uid('c'),
+          name: 'ریاضیات مهندسی',
+          color: 'indigo',
+          books: [
+            { id: uid('b'), title: 'ریاضی مهندسی پیشرفته (کرزیگ)', totalPages: 220, completedUnits: 0 },
+            { id: uid('b'), title: 'ریاضی مهندسی (شیدفر)', totalPages: 180, completedUnits: 0 },
+            { id: uid('b'), title: 'متغیرهای مختلط (چرچیل)', totalPages: 150, completedUnits: 0 }
+          ]
+        },
+        {
+          id: uid('c'),
+          name: 'معادلات دیفرانسیل',
+          color: 'cyan',
+          books: [
+            { id: uid('b'), title: 'معادلات دیفرانسیل (بویس و دیپریما)', totalPages: 240, completedUnits: 0 },
+            { id: uid('b'), title: 'جزوه و نکات کلیدی معادلات', totalPages: 110, completedUnits: 0 }
+          ]
+        },
+        {
+          id: uid('c'),
+          name: 'سیگنال‌ها و سیستم‌ها',
+          color: 'emerald',
+          books: [
+            { id: uid('b'), title: 'سیگنال‌ها و سیستم‌ها (اوپنهایم)', totalPages: 320, completedUnits: 0 }
+          ]
+        }
+      ];
+    }
+
+    function getFullEESampleCourses() {
+      return [
+        {
+          id: uid('c'),
+          name: 'ریاضیات مهندسی',
+          color: 'indigo',
+          books: [
+            { id: uid('b'), title: 'ریاضی مهندسی پیشرفته (کرزیگ)', totalPages: 220, completedUnits: 0 },
+            { id: uid('b'), title: 'ریاضی مهندسی (شیدفر)', totalPages: 180, completedUnits: 0 },
+            { id: uid('b'), title: 'متغیرهای مختلط (چرچیل)', totalPages: 150, completedUnits: 0 }
+          ]
+        },
+        {
+          id: uid('c'),
+          name: 'معادلات دیفرانسیل',
+          color: 'cyan',
+          books: [
+            { id: uid('b'), title: 'معادلات دیفرانسیل (بویس و دیپریما)', totalPages: 240, completedUnits: 0 },
+            { id: uid('b'), title: 'جزوه کلاسی و حل تمرین', totalPages: 120, completedUnits: 0 }
+          ]
+        },
+        {
+          id: uid('c'),
+          name: 'سیگنال و سیستم',
+          color: 'emerald',
+          books: [
+            { id: uid('b'), title: 'سیگنال‌ها و سیستم‌ها (اوپنهایم)', totalPages: 320, completedUnits: 0 }
+          ]
+        },
+        {
+          id: uid('c'),
+          name: 'اصول سیستم‌های مخابراتی',
+          color: 'amber',
+          books: [
+            { id: uid('b'), title: 'سیستم‌های مخابراتی (کارلسون)', totalPages: 280, completedUnits: 0 },
+            { id: uid('b'), title: 'سیستم‌های مخابراتی (هایکین)', totalPages: 200, completedUnits: 0 }
+          ]
+        },
+        {
+          id: uid('c'),
+          name: 'الکترونیک ۱',
+          color: 'rose',
+          books: [
+            { id: uid('b'), title: 'مدارهای میکروالکترونیک (سدرا و اسمیت - جلد ۱)', totalPages: 260, completedUnits: 0 }
+          ]
+        },
+        {
+          id: uid('c'),
+          name: 'الکترونیک ۲',
+          color: 'violet',
+          books: [
+            { id: uid('b'), title: 'مبانی میکروالکترونیک (بهزاد رضوی)', totalPages: 250, completedUnits: 0 }
+          ]
+        },
+        {
+          id: uid('c'),
+          name: 'مدارهای الکتریکی ۱ و ۲',
+          color: 'blue',
+          books: [
+            { id: uid('b'), title: 'تجزیه و تحلیل مدار (جبهه‌دار مارالانی)', totalPages: 300, completedUnits: 0 },
+            { id: uid('b'), title: 'تحلیل مدار مهندسی (هیت)', totalPages: 220, completedUnits: 0 }
+          ]
+        }
+      ];
+    }
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (parsed && typeof parsed === 'object') {
+            const migratedLogs = {};
+            if (parsed.dailyLogs && typeof parsed.dailyLogs === 'object') {
+              for (const k of Object.keys(parsed.dailyLogs)) {
+                migratedLogs[normalizeToJalaliKey(k, getRealTodayJKey())] = parsed.dailyLogs[k];
+              }
+            }
+            state = {
+              settings: {
+                deadline: normalizeToJalaliKey(parsed.settings?.deadline, DEFAULT_DEADLINE_JALALI),
+                simulatedDate: parsed.settings?.simulatedDate
+                  ? normalizeToJalaliKey(parsed.settings.simulatedDate, null)
+                  : null
+              },
+              courses: Array.isArray(parsed.courses) ? parsed.courses : [],
+              exams: Array.isArray(parsed.exams)
+                ? parsed.exams.map(ex => ({ ...ex, date: normalizeToJalaliKey(ex.date, getRealTodayJKey()) }))
+                : [],
+              dailyLogs: migratedLogs
+            };
+            saveState();
+            return;
+          }
+        }
+      } catch (err) {
+        console.error('Error loading localStorage:', err);
+      }
+
+      const todayJ = getRealTodayJKey();
+      const defaultDeadline = jalaliKeyToJDN(DEFAULT_DEADLINE_JALALI) > jalaliKeyToJDN(todayJ)
+        ? DEFAULT_DEADLINE_JALALI
+        : addDaysJalali(todayJ, 120);
+
+      state = {
+        settings: {
+          deadline: defaultDeadline,
+          simulatedDate: null
+        },
+        courses: getStarterSampleCourses(),
+        exams: [
+          { id: uid('ex'), title: 'آزمون جامع آزمایشی مرحله ۱', date: addDaysJalali(todayJ, 14), durationHours: 3, completed: false },
+          { id: uid('ex'), title: 'آزمون جامع آزمایشی مرحله ۲', date: addDaysJalali(todayJ, 28), durationHours: 3, completed: false }
+        ],
+        dailyLogs: {}
+      };
+      saveState();
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (err) {
+        showToast('خطا در ذخیره اطلاعات در حافظه گوشی!', 'error');
+      }
+    }
+
+    /*************************************************************************
+     * 4. WEIGHTED 4-PASS FULL-HORIZON SCHEDULING ENGINE (TODAY -> DEADLINE)
+     *    Generates exact day-by-day plan for every day until deadline,
+     *    exact 4-pass start/end dates per book & overall, and auto-compression.
+     *************************************************************************/
+    function getDayWeight(jKey) {
+      const dayExams = state.exams.filter(ex => ex.date === jKey && !ex.completed);
+      const totalHours = dayExams.reduce((sum, ex) => sum + (Number(ex.durationHours) || 0), 0);
+      if (totalHours <= 0) return 1.0;
+      if (totalHours >= 8) return 0; // Very long exam day -> zero study load
+      return Math.max(0.2, Number((1 - totalHours * 0.12).toFixed(2)));
+    }
+
+    /** Convert unit position [0..4P] to weighted effort [0..4P] using 45/25/17/13 weights */
+    function unitsToEffort(totalPages, units) {
+      const maxU = totalPages * 4;
+      const u = Math.max(0, Math.min(maxU, units));
+      let effort = 0;
+      let rem = u;
+      for (let p = 0; p < 4 && rem > 0; p++) {
+        const take = Math.min(totalPages, rem);
+        effort += take * PASS_INFO[p].effort;
+        rem -= take;
+      }
+      return effort;
+    }
+
+    /** Convert weighted effort [0..4P] back to integer unit position [0..4P] */
+    function effortToUnits(totalPages, targetEffort) {
+      const maxEffort = totalPages * 4;
+      let rem = Math.max(0, Math.min(maxEffort, targetEffort));
+      let units = 0;
+      for (let p = 0; p < 4; p++) {
+        const passEffort = totalPages * PASS_INFO[p].effort;
+        if (rem >= passEffort - 1e-6) {
+          units += totalPages;
+          rem -= passEffort;
+        } else {
+          units += rem / PASS_INFO[p].effort;
+          break;
+        }
+      }
+      return Math.min(totalPages * 4, Math.round(units));
+    }
+
+    function describeReadingSlice(totalPages, startUnit, pagesToRead) {
+      const maxUnits = totalPages * 4;
+      const safeStart = Math.min(startUnit, maxUnits);
+      const safeEnd = Math.min(safeStart + pagesToRead, maxUnits);
+
+      if (safeStart >= maxUnits || pagesToRead <= 0) {
+        return { passIndex: 3, passInfo: PASS_INFO[3], rangeText: 'تکمیل کامل ۴ دور', isCrossPass: false };
+      }
+
+      const startPass = Math.min(3, Math.floor(safeStart / totalPages));
+      const startPage = (safeStart % totalPages) + 1;
+      const endUnitInclusive = safeEnd - 1;
+      const endPass = Math.min(3, Math.floor(endUnitInclusive / totalPages));
+      const endPage = (endUnitInclusive % totalPages) + 1;
+
+      if (startPass === endPass) {
+        const rangeText = startPage === endPage
+          ? `صفحه ${toFaNum(startPage)}`
+          : `صفحه ${toFaNum(startPage)} تا ${toFaNum(endPage)}`;
+        return { passIndex: startPass, passInfo: PASS_INFO[startPass], rangeText, isCrossPass: false };
+      } else {
+        const rangeText = `ص ${toFaNum(startPage)} تا ${toFaNum(totalPages)} (${PASS_INFO[startPass].short}) ← ص ۱ تا ${toFaNum(endPage)} (${PASS_INFO[endPass].short})`;
+        return { passIndex: startPass, passInfo: PASS_INFO[startPass], rangeText, isCrossPass: true };
+      }
+    }
+
+    /**
+     * Builds the complete schedule from active today through deadline:
+     * - dayMap[jKey]: { jKey, weight, totalPages, tasks[], exams[], dominantPass }
+     * - todayPlan & tomorrowPlan
+     * - bookRoadmaps[bookId]: start/end Jalali dates for each of the 4 passes
+     * - overallRoadmap: start/end Jalali dates for the 4 passes across the entire project
+     */
+    function computeFullSchedule() {
+      const todayJKey = getActiveJKey();
+      const deadlineJKey = state.settings.deadline;
+      const todayJdn = jalaliKeyToJDN(todayJKey);
+      const deadlineJdn = jalaliKeyToJDN(deadlineJKey);
+      const rawDaysLeft = (deadlineJdn - todayJdn) + 1;
+      const isOverdue = rawDaysLeft <= 0;
+      const horizonDays = Math.min(1100, Math.max(1, rawDaysLeft));
+
+      // 1. Precompute day keys & weights across horizon
+      const days = [];
+      let totalWeight = 0;
+      const examsByDate = {};
+      for (const ex of state.exams) {
+        if (!examsByDate[ex.date]) examsByDate[ex.date] = [];
+        examsByDate[ex.date].push(ex);
+      }
+
+      for (let i = 0; i < horizonDays; i++) {
+        const { jy, jm, jd } = d2j(todayJdn + i);
+        const jKey = toJalaliKey(jy, jm, jd);
+        const weight = getDayWeight(jKey);
+        days.push({ jKey, weight, exams: examsByDate[jKey] || [], tasks: [], totalPages: 0, dominantPass: null });
+        totalWeight += weight;
+      }
+
+      // Fallback if all days are 0-weight exam days
+      if (totalWeight <= 0) {
+        days[0].weight = 0.25;
+        totalWeight = 0.25;
+      }
+
+      const todayLogs = state.dailyLogs[todayJKey] || {};
+      const dayMap = {};
+      days.forEach(d => { dayMap[d.jKey] = d; });
+
+      const bookRoadmaps = {};
+      let totalRemainingUnitsNow = 0;
+      let totalTodayTargetPages = 0;
+      let totalTodayCompletedPages = 0;
+      let totalTomorrowOnTrackPages = 0;
+      let totalTomorrowIfSkippedPages = 0;
+
+      // 2. Project every book across the entire horizon using 45/25/17/13 weighted effort
+      for (const course of state.courses) {
+        const colorMeta = getColorMeta(course.color);
+
+        for (const book of course.books) {
+          const P = book.totalPages;
+          const maxU = P * 4;
+          const readToday = Math.max(0, Number(todayLogs[book.id] || 0));
+          const startOfDayUnits = Math.max(0, Math.min(maxU, book.completedUnits - readToday));
+          const remainingNow = Math.max(0, maxU - book.completedUnits);
+          totalRemainingUnitsNow += remainingNow;
+
+          const startEffort = unitsToEffort(P, startOfDayUnits);
+          const remEffortTotal = Math.max(0, maxU - startEffort);
+
+          const passRanges = [
+            { start: null, end: null, done: startOfDayUnits >= P },
+            { start: null, end: null, done: startOfDayUnits >= P * 2 },
+            { start: null, end: null, done: startOfDayUnits >= P * 3 },
+            { start: null, end: null, done: startOfDayUnits >= P * 4 }
+          ];
+
+          let cumWeight = 0;
+          let prevUnits = startOfDayUnits;
+
+          for (let i = 0; i < horizonDays; i++) {
+            const d = days[i];
+            if (prevUnits >= maxU) break;
+
+            cumWeight += d.weight;
+            let nextUnits;
+            if (i === horizonDays - 1) {
+              nextUnits = maxU;
+            } else if (d.weight === 0) {
+              nextUnits = prevUnits;
+            } else {
+              const targetEff = startEffort + remEffortTotal * (cumWeight / totalWeight);
+              nextUnits = effortToUnits(P, targetEff);
+              // Ensure steady progress if remaining effort > 0 and weight > 0
+              if (nextUnits <= prevUnits && remEffortTotal > 0 && d.weight > 0) {
+                // Only bump if fractional effort accumulated enough; keep exactness
+                nextUnits = Math.min(maxU, prevUnits);
+              }
+            }
+
+            // Guarantee Day 0 gets at least 1 page if book still has remaining units & day weight > 0
+            if (i === 0 && nextUnits === prevUnits && prevUnits < maxU && d.weight > 0) {
+              nextUnits = Math.min(maxU, prevUnits + 1);
+            }
+
+            const pagesForDay = nextUnits - prevUnits;
+            if (pagesForDay > 0) {
+              const slice = describeReadingSlice(P, prevUnits, pagesForDay);
+
+              // Record pass start/end dates for Roadmap
+              const pStart = Math.min(3, Math.floor(prevUnits / P));
+              const pEnd = Math.min(3, Math.floor((nextUnits - 1) / P));
+              for (let p = pStart; p <= pEnd; p++) {
+                if (!passRanges[p].start) passRanges[p].start = d.jKey;
+                passRanges[p].end = d.jKey;
+              }
+
+              const isToday = (i === 0);
+              const isDone = isToday ? (readToday >= pagesForDay || remainingNow === 0) : false;
+
+              if (isToday) {
+                totalTodayTargetPages += pagesForDay;
+                totalTodayCompletedPages += Math.min(readToday, pagesForDay);
+              }
+              if (i === 1) {
+                totalTomorrowOnTrackPages += pagesForDay;
+              }
+
+              d.tasks.push({
+                courseId: course.id,
+                courseName: course.name,
+                colorMeta,
+                bookId: book.id,
+                bookTitle: book.title,
+                totalPages: P,
+                targetPages: pagesForDay,
+                readToday: isToday ? readToday : 0,
+                isDone,
+                slice
+              });
+              d.totalPages += pagesForDay;
+            }
+
+            prevUnits = nextUnits;
+          }
+
+          // Calculate tomorrow's compressed target if user skips remaining of today
+          if (horizonDays >= 2 && remainingNow > 0 && days[1].weight > 0) {
+            const remWeightFromTom = Math.max(0.25, totalWeight - days[0].weight);
+            const effNow = unitsToEffort(P, book.completedUnits);
+            const effRemNow = Math.max(0, maxU - effNow);
+            const nextIfSkipped = effortToUnits(P, effNow + effRemNow * (days[1].weight / remWeightFromTom));
+            totalTomorrowIfSkippedPages += Math.max(1, nextIfSkipped - book.completedUnits);
+          }
+
+          bookRoadmaps[book.id] = {
+            bookId: book.id,
+            bookTitle: book.title,
+            courseName: course.name,
+            colorMeta,
+            totalPages: P,
+            completedUnits: book.completedUnits,
+            passRanges
+          };
+        }
+      }
+
+      // Compute dominant pass per day for Calendar coloring
+      for (const d of days) {
+        if (d.tasks.length > 0) {
+          const counts = [0, 0, 0, 0];
+          d.tasks.forEach(t => { counts[t.slice.passIndex] += t.targetPages; });
+          let best = 0;
+          for (let p = 1; p < 4; p++) { if (counts[p] > counts[best]) best = p; }
+          d.dominantPass = best;
+        }
+      }
+
+      // Compute Overall 4-Pass Roadmap Milestones across all books (or pure 45/25/17/13 split if no books)
+      const overallRoadmap = [0, 1, 2, 3].map(p => {
+        let minStart = null;
+        let maxEnd = null;
+        let allDone = state.courses.some(c => c.books.length > 0);
+        for (const bid in bookRoadmaps) {
+          const pr = bookRoadmaps[bid].passRanges[p];
+          if (!pr.done) allDone = false;
+          if (pr.start && (!minStart || jalaliKeyToJDN(pr.start) < jalaliKeyToJDN(minStart))) minStart = pr.start;
+          if (pr.end && (!maxEnd || jalaliKeyToJDN(pr.end) > jalaliKeyToJDN(maxEnd))) maxEnd = pr.end;
+        }
+        return {
+          passInfo: PASS_INFO[p],
+          start: minStart,
+          end: maxEnd,
+          done: allDone && !minStart
+        };
+      });
+
+      const avgPagesPerDay = totalWeight > 0 ? Math.ceil(totalRemainingUnitsNow / totalWeight) : totalRemainingUnitsNow;
+
+      let compression = { label: 'عادی و متعادل', badgeClass: 'badge-emerald', dotClass: 'dot-emerald', avgPagesPerDay };
+      if (isOverdue || avgPagesPerDay > 85) {
+        compression = { label: 'بحرانی (فشردگی بالا)', badgeClass: 'badge-rose', dotClass: 'dot-rose', avgPagesPerDay };
+      } else if (avgPagesPerDay > 45) {
+        compression = { label: 'فشرده', badgeClass: 'badge-amber', dotClass: 'dot-amber', avgPagesPerDay };
+      }
+
+      return {
+        todayJKey,
+        tomorrowJKey: addDaysJalali(todayJKey, 1),
+        deadlineJKey,
+        daysLeft: rawDaysLeft,
+        isOverdue,
+        days,
+        dayMap,
+        todayPlan: days[0],
+        tomorrowPlan: days[1] || null,
+        totalTodayTargetPages,
+        totalTodayCompletedPages,
+        totalTomorrowOnTrackPages,
+        totalTomorrowIfSkippedPages,
+        bookRoadmaps,
+        overallRoadmap,
+        compression
+      };
+    }
+
+    /** Compute overall stats + user's actual average daily reading speed */
+    function computeOverallStats() {
+      let totalUnitsAll = 0;
+      let completedUnitsAll = 0;
+      let totalBooks = 0;
+      const phaseCounts = [0, 0, 0, 0, 0];
+
+      for (const course of state.courses) {
+        for (const book of course.books) {
+          totalBooks++;
+          const maxU = book.totalPages * 4;
+          const compU = Math.min(maxU, book.completedUnits);
+          totalUnitsAll += maxU;
+          completedUnitsAll += compU;
+          if (compU >= maxU && maxU > 0) phaseCounts[4]++;
+          else phaseCounts[Math.min(3, Math.floor(compU / book.totalPages))]++;
+        }
+      }
+
+      // Actual user daily reading average from logged study days
+      let activeDays = 0;
+      let loggedPagesTotal = 0;
+      for (const dk in state.dailyLogs) {
+        const dayObj = state.dailyLogs[dk];
+        const sum = Object.values(dayObj || {}).reduce((s, v) => s + (Number(v) || 0), 0);
+        if (sum > 0) {
+          activeDays++;
+          loggedPagesTotal += sum;
+        }
+      }
+      const realAvgSpeed = activeDays > 0 ? Math.round(loggedPagesTotal / activeDays) : 0;
+      const overallPercent = totalUnitsAll > 0 ? Math.round((completedUnitsAll / totalUnitsAll) * 100) : 0;
+
+      return { totalUnitsAll, completedUnitsAll, totalBooks, phaseCounts, overallPercent, realAvgSpeed, activeDays };
+    }
+
+    /*************************************************************************
+     * 5. USER ACTIONS
+     *************************************************************************/
+    function findBookById(bookId) {
+      for (const c of state.courses) {
+        const b = c.books.find(x => x.id === bookId);
+        if (b) return b;
+      }
+      return null;
+    }
+
+    function toggleDailyTask(bookId, targetPages) {
+      const todayJKey = getActiveJKey();
+      if (!state.dailyLogs[todayJKey]) state.dailyLogs[todayJKey] = {};
+      const book = findBookById(bookId);
+      if (!book) return;
+
+      const maxUnits = book.totalPages * 4;
+      const currentReadToday = Number(state.dailyLogs[todayJKey][bookId] || 0);
+
+      if (currentReadToday >= targetPages) {
+        book.completedUnits = Math.max(0, book.completedUnits - currentReadToday);
+        delete state.dailyLogs[todayJKey][bookId];
+        showToast(`تیک «${book.title}» برداشته شد`, 'info');
+      } else {
+        const delta = targetPages - currentReadToday;
+        const actualAdd = Math.min(delta, maxUnits - book.completedUnits);
+        book.completedUnits = Math.min(maxUnits, book.completedUnits + actualAdd);
+        state.dailyLogs[todayJKey][bookId] = currentReadToday + actualAdd;
+        showToast(`عالی! ${toFaNum(targetPages)} صفحه از «${book.title}» ثبت شد`, 'success');
+      }
+
+      saveState();
+      renderApp();
+    }
+
+    function openCustomPagesModal(bookId, targetPages, currentReadToday) {
+      const book = findBookById(bookId);
+      if (!book) return;
+
+      openModal('ثبت تعداد صفحه خوانده‌شده امروز', `
+        <div class="stack-md">
+          <div class="inner-row" style="display:block;">
+            <p class="subtext">منبع انتخابی:</p>
+            <p class="h3-title" style="margin-top:2px;">${escapeHtml(book.title)}</p>
+            <p class="text-xs font-bold" style="color:var(--cyan); margin-top:4px;">سهمیه امروز: ${toFaNum(targetPages)} صفحه</p>
+          </div>
+          <div>
+            <label class="form-label">امروز در مجموع چند صفحه خواندید؟</label>
+            <input id="custom-pages-input" type="number" min="0" max="${book.totalPages * 4}" value="${currentReadToday || targetPages}" class="form-input" />
+            <p class="subtext" style="margin-top:6px;">در صورت مطالعه کمتر، مابقی روی روزهای باقی‌مانده سرشکن می‌شود؛ در صورت مطالعه بیشتر، برنامه روزهای بعد سبک‌تر خواهد شد.</p>
+          </div>
+          <div class="flex-between" style="padding-top:4px;">
+            <button onclick="saveCustomPages('${bookId}')" class="btn btn-primary" style="flex:1;">ثبت مطالعه</button>
+            <button onclick="closeModal()" class="btn btn-ghost">انصراف</button>
+          </div>
+        </div>
+      `);
+    }
+
+    function saveCustomPages(bookId) {
+      const newReadToday = Math.max(0, parseInt(document.getElementById('custom-pages-input').value, 10) || 0);
+      const book = findBookById(bookId);
+      if (!book) return;
+
+      const todayJKey = getActiveJKey();
+      if (!state.dailyLogs[todayJKey]) state.dailyLogs[todayJKey] = {};
+      const oldReadToday = Number(state.dailyLogs[todayJKey][bookId] || 0);
+      const baseUnits = Math.max(0, book.completedUnits - oldReadToday);
+      const clampedNewRead = Math.min(newReadToday, (book.totalPages * 4) - baseUnits);
+
+      book.completedUnits = baseUnits + clampedNewRead;
+      if (clampedNewRead > 0) state.dailyLogs[todayJKey][bookId] = clampedNewRead;
+      else delete state.dailyLogs[todayJKey][bookId];
+
+      saveState();
+      closeModal();
+      showToast(`${toFaNum(clampedNewRead)} صفحه برای امروز ثبت شد`, 'success');
+      renderApp();
+    }
+
+    function simulateNextDay() {
+      const nextJKey = addDaysJalali(getActiveJKey(), 1);
+      state.settings.simulatedDate = nextJKey;
+      const { jy, jm } = parseJalaliKey(nextJKey);
+      calViewYear = jy;
+      calViewMonth = jm;
+      calSelectedDate = nextJKey;
+      saveState();
+      showToast(`پایان امروز ثبت شد! تاریخ به ${formatJalaliDisplay(nextJKey)} رفت و برنامه بازمحاسبه شد`, 'info');
+      renderApp();
+    }
+
+    function resetSimulatedDate() {
+      state.settings.simulatedDate = null;
+      const todayJ = getRealTodayJKey();
+      const { jy, jm } = parseJalaliKey(todayJ);
+      calViewYear = jy;
+      calViewMonth = jm;
+      calSelectedDate = todayJ;
+      saveState();
+      showToast(`تاریخ به امروز واقعی (${formatJalaliDisplay(todayJ)}) بازگشت`, 'success');
+      renderApp();
+    }
+
+    function toggleExamDone(examId) {
+      const ex = state.exams.find(e => e.id === examId);
+      if (!ex) return;
+      ex.completed = !ex.completed;
+      saveState();
+      showToast(ex.completed ? `آزمون «${ex.title}» تکمیل شد` : 'وضعیت آزمون بازگردانی شد', 'success');
+      renderApp();
+    }
+
+    /*************************************************************************
+     * 6. RENDERING: HEADER, 5 TABS & INTERACTIVE VIEWS
+     *************************************************************************/
+    function switchTab(tab) {
+      activeTab = tab;
+      if (tab === 'calendar') {
+        const activeJ = getActiveJKey();
+        if (!calViewYear || !calViewMonth) {
+          const { jy, jm } = parseJalaliKey(activeJ);
+          calViewYear = jy;
+          calViewMonth = jm;
+        }
+        if (!calSelectedDate) calSelectedDate = activeJ;
+      }
+      renderApp();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function renderHeader(schedule) {
+      document.getElementById('header-deadline-text').textContent = `ددلاین: ${formatJalaliDisplay(schedule.deadlineJKey)}`;
+
+      const daysBadge = document.getElementById('header-days-badge');
+      const daysText = document.getElementById('header-days-left');
+
+      if (schedule.isOverdue) {
+        daysBadge.classList.add('overdue');
+        daysText.textContent = 'اتمام مهلت!';
+      } else {
+        daysBadge.classList.remove('overdue');
+        daysText.textContent = `${toFaNum(schedule.daysLeft)} روز مانده`;
+      }
+
+      const simBanner = document.getElementById('sim-banner');
+      if (state.settings.simulatedDate) {
+        simBanner.classList.remove('hidden');
+        document.getElementById('sim-banner-text').textContent = `شبیه‌سازی: ${formatJalaliDisplay(state.settings.simulatedDate, true)}`;
+      } else {
+        simBanner.classList.add('hidden');
+      }
+
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-tab') === activeTab);
+      });
+    }
+
+    function renderApp() {
+      const schedule = computeFullSchedule();
+      renderHeader(schedule);
+
+      const main = document.getElementById('main-content');
+      if (activeTab === 'today') {
+        main.innerHTML = renderTodayTab(schedule);
+      } else if (activeTab === 'calendar') {
+        main.innerHTML = renderCalendarTab(schedule);
+      } else if (activeTab === 'courses') {
+        main.innerHTML = renderCoursesTab();
+      } else if (activeTab === 'exams') {
+        main.innerHTML = renderExamsTab();
+      } else if (activeTab === 'settings') {
+        main.innerHTML = renderSettingsTab(schedule);
+      }
+    }
+
+    /* -----------------------------------------------------------------------
+     * TAB 1: امروز (Daily Execution)
+     * ----------------------------------------------------------------------- */
+    function renderTodayTab(schedule) {
+      const todayPlan = schedule.todayPlan;
+      const todayPercent = schedule.totalTodayTargetPages > 0
+        ? Math.min(100, Math.round((schedule.totalTodayCompletedPages / schedule.totalTodayTargetPages) * 100))
+        : (state.courses.length > 0 ? 100 : 0);
+
+      // Upcoming close exams (next 3 days, excluding today)
+      const todayJdn = jalaliKeyToJDN(schedule.todayJKey);
+      const nearExams = state.exams.filter(ex => {
+        if (ex.completed) return false;
+        const diff = jalaliKeyToJDN(ex.date) - todayJdn;
+        return diff > 0 && diff <= 3;
+      });
+
+      const skippedDiff = schedule.totalTomorrowIfSkippedPages - schedule.totalTomorrowOnTrackPages;
+
+      return `
+        <div class="stack-md animate-tab">
+          <!-- Hero Summary Card -->
+          <section class="card">
+            <div class="glow-orb"></div>
+            <div class="flex-between" style="align-items:flex-start; margin-bottom:12px;">
+              <div>
+                <p class="subtext font-bold" style="color:var(--cyan);">${formatJalaliDisplay(schedule.todayJKey, true)}</p>
+                <h2 class="h2-title" style="margin-top:2px;">برنامه مطالعه امروز</h2>
+              </div>
+              <div class="badge ${schedule.compression.badgeClass}">
+                <span class="dot ${schedule.compression.dotClass}"></span>
+                <span>${schedule.compression.label}</span>
+              </div>
+            </div>
+
+            <div class="stack-xs" style="margin-bottom:13px;">
+              <div class="flex-between text-xs">
+                <span style="color:var(--text-secondary);">پیشرفت امروز</span>
+                <span class="font-extrabold" style="color:var(--cyan);">${toFaNum(schedule.totalTodayCompletedPages)} از ${toFaNum(schedule.totalTodayTargetPages)} صفحه (${toFaNum(todayPercent)}٪)</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-fill fill-grad" style="width:${todayPercent}%"></div>
+              </div>
+            </div>
+
+            <div class="grid-3" style="padding-top:10px; border-top:1px solid rgba(30,41,59,0.8);">
+              <div class="stat-box">
+                <div class="stat-label">میانگین کل پروژه</div>
+                <div class="stat-val">${toFaNum(schedule.compression.avgPagesPerDay)} ص/روز</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-label">ظرفیت امروز</div>
+                <div class="stat-val" style="color:${todayPlan.weight < 1 ? 'var(--amber)' : 'var(--emerald)'};">${toFaNum(Math.round(todayPlan.weight * 100))}٪</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-label">تضمین تا ددلاین</div>
+                <div class="stat-val" style="color:var(--cyan);">۴ دور کامل</div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Today Exam Alert Banner -->
+          ${todayPlan.exams.map(ex => `
+            <div class="exam-banner">
+              <div style="min-width:0;">
+                <span class="text-xxs font-extrabold" style="color:var(--amber);">آزمون امروز • ${toFaNum(ex.durationHours)} ساعت</span>
+                <div class="h3-title truncate ${ex.completed ? 'line-through' : ''}" style="margin-top:2px;">${escapeHtml(ex.title)}</div>
+                <p class="subtext" style="color:#fde68a;">سهمیه صفحات امروز متناسب با زمان آزمون تعدیل شده است</p>
+              </div>
+              <button onclick="toggleExamDone('${ex.id}')" class="btn btn-sm ${ex.completed ? 'btn-emerald' : 'btn-amber'}" style="flex-shrink:0;">
+                ${ex.completed ? 'تکمیل شد ✓' : 'تکمیل آزمون'}
+              </button>
+            </div>
+          `).join('')}
+
+          <!-- Near Upcoming Exam Reminder -->
+          ${nearExams.length > 0 ? `
+            <div class="alert-box alert-amber flex-between">
+              <div>
+                <strong>یادآوری آزمون نزدیک:</strong> ${escapeHtml(nearExams[0].title)}
+                (${toFaNum(jalaliKeyToJDN(nearExams[0].date) - todayJdn)} روز دیگر - ${formatJalaliShort(nearExams[0].date)})
+              </div>
+              <button onclick="switchTab('exams')" class="text-xxs font-extrabold" style="color:#fff; flex-shrink:0;">مشاهده</button>
+            </div>
+          ` : ''}
+
+          <!-- Today's Study Task Cards -->
+          ${todayPlan.tasks.length === 0 ? `
+            <div class="card" style="text-align:center; padding:30px 16px;">
+              <div class="h2-title" style="margin-bottom:6px;">
+                ${state.courses.length === 0
+                  ? 'هنوز درسی اضافه نکرده‌اید!'
+                  : todayPlan.weight === 0
+                    ? 'امروز روز آزمون طولانی است (بدون سهمیه مطالعه)'
+                    : 'تبریک! هر ۴ دور تمام منابع تکمیل شده است 🎉'}
+              </div>
+              <p class="subtext" style="margin-bottom:14px;">
+                ${state.courses.length === 0
+                  ? 'از تب «دروس و منابع» کتاب‌های خود را اضافه کنید تا برنامه کامل تا ددلاین ساخته شود.'
+                  : 'می‌توانید از تب «تقویم و نقشه» برنامه کل سال و روزهای آینده را بررسی کنید.'}
+              </p>
+              <button onclick="switchTab('${state.courses.length === 0 ? 'courses' : 'calendar'}')" class="btn btn-primary">
+                ${state.courses.length === 0 ? 'افزودن دروس و منابع' : 'مشاهده تقویم و نقشه راه'}
+              </button>
+            </div>
+          ` : `
+            <div class="stack-sm">
+              ${todayPlan.tasks.map(task => {
+                const isPartial = task.readToday > 0 && task.readToday < task.targetPages;
+                return `
+                  <div class="card card-compact ${task.isDone ? 'card-done' : ''}">
+                    <div class="flex-start">
+                      <button onclick="toggleDailyTask('${task.bookId}', ${task.targetPages})" class="check-box ${task.isDone ? 'checked' : ''}" aria-label="تکمیل مطالعه">
+                        ${task.isDone ? `<svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>` : ''}
+                      </button>
+
+                      <div style="flex:1; min-width:0;">
+                        <div class="flex-wrap" style="margin-bottom:5px;">
+                          <span class="badge ${task.colorMeta.badge}">${escapeHtml(task.courseName)}</span>
+                          <span class="badge ${task.slice.passInfo.badgeClass}">${task.slice.passInfo.label}</span>
+                        </div>
+
+                        <div class="h3-title ${task.isDone ? 'line-through' : ''}" style="line-height:1.45;">
+                          ${escapeHtml(task.bookTitle)}
+                        </div>
+
+                        <div class="flex-wrap" style="margin-top:5px;">
+                          <span class="text-xs font-extrabold" style="color:var(--cyan);">${toFaNum(task.targetPages)} صفحه</span>
+                          <span style="color:var(--text-dim);">•</span>
+                          <span class="subtext" style="color:var(--text-secondary);">${task.slice.rangeText}</span>
+                        </div>
+
+                        <div class="task-footer">
+                          <span class="subtext font-bold" style="color:${task.isDone ? 'var(--emerald)' : isPartial ? 'var(--amber)' : 'var(--text-muted)'};">
+                            ${task.isDone
+                              ? `انجام شد (${toFaNum(task.readToday)} صفحه)`
+                              : isPartial
+                                ? `ثبت‌شده: ${toFaNum(task.readToday)} از ${toFaNum(task.targetPages)} ص`
+                                : 'در انتظار مطالعه'}
+                          </span>
+                          <button onclick="openCustomPagesModal('${task.bookId}', ${task.targetPages}, ${task.readToday})" class="btn btn-ghost btn-sm">
+                            ثبت صفحه دلخواه
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          `}
+
+          <!-- Short Summary of Tomorrow -->
+          ${schedule.tomorrowPlan ? `
+            <section class="card card-compact stack-xs">
+              <div class="flex-between">
+                <div>
+                  <span class="text-xxs font-bold" style="color:var(--indigo);">خلاصه فردا (${formatJalaliDisplay(schedule.tomorrowJKey, true)})</span>
+                  <div class="text-xs font-extrabold" style="margin-top:2px;">
+                    ${toFaNum(schedule.totalTomorrowOnTrackPages)} صفحه در ${toFaNum(schedule.tomorrowPlan.tasks.length)} منبع
+                    ${schedule.tomorrowPlan.exams.length > 0 ? `• دارای آزمون` : ''}
+                  </div>
+                </div>
+                <button onclick="calendarSubTab='weekly'; switchTab('calendar');" class="btn btn-indigo btn-sm">نمای هفته ←</button>
+              </div>
+              ${skippedDiff > 0 ? `
+                <div class="text-xxs" style="color:#fde68a;">
+                  ⚠️ در صورت تیک نزدن باقی‌مانده امروز، سهمیه فردا به ${toFaNum(schedule.totalTomorrowIfSkippedPages)} صفحه (+${toFaNum(skippedDiff)} ص فشرده‌تر) افزایش می‌یابد.
+                </div>
+              ` : ''}
+            </section>
+          ` : ''}
+
+          <!-- End Today & Go to Next Day (Auto-Compression Tester) -->
+          <button onclick="simulateNextDay()" class="btn btn-ghost btn-full" style="border-color:var(--cyan-border); color:var(--cyan); padding:12px;">
+            ثبت پایان امروز و رفتن به روز بعد (تست فشرده‌سازی) ←
+          </button>
+        </div>
+      `;
+    }
+
+    /* -----------------------------------------------------------------------
+     * TAB 2: تقویم و نقشه راه (Roadmap + Monthly Jalali Calendar + Weekly)
+     * ----------------------------------------------------------------------- */
+    function renderCalendarTab(schedule) {
+      return `
+        <div class="stack-md animate-tab">
+          <div>
+            <h2 class="h2-title">تقویم جامع و نقشه راه تا ددلاین</h2>
+            <p class="subtext">مشاهده کامل برنامه تمام روزها و زمان‌بندی ۴ دور تا ${formatJalaliDisplay(schedule.deadlineJKey)}</p>
+          </div>
+
+          <!-- 3 Sub-Tabs Segmented Control -->
+          <div class="segmented-3">
+            <button onclick="calendarSubTab='roadmap'; renderApp();" class="seg-btn ${calendarSubTab === 'roadmap' ? 'active' : ''}">نقشه راه ۴ دور</button>
+            <button onclick="calendarSubTab='monthly'; renderApp();" class="seg-btn ${calendarSubTab === 'monthly' ? 'active' : ''}">تقویم ماهانه</button>
+            <button onclick="calendarSubTab='weekly'; renderApp();" class="seg-btn ${calendarSubTab === 'weekly' ? 'active' : ''}">نمای هفتگی</button>
+          </div>
+
+          ${calendarSubTab === 'roadmap'
+            ? renderRoadmapSubTab(schedule)
+            : calendarSubTab === 'monthly'
+              ? renderMonthlySubTab(schedule)
+              : renderWeeklySubTab(schedule)}
+        </div>
+      `;
+    }
+
+    /** Sub-Tab 2.1: نقشه راه ۴ دور (Overall + Per-Book Timeline) */
+    function renderRoadmapSubTab(schedule) {
+      const allBooks = [];
+      state.courses.forEach(c => c.books.forEach(b => allBooks.push({ ...b, courseName: c.name, colorMeta: getColorMeta(c.color) })));
+
+      const selectedRoadmap = roadmapFilterBookId === 'all'
+        ? schedule.overallRoadmap
+        : (schedule.bookRoadmaps[roadmapFilterBookId]
+            ? schedule.bookRoadmaps[roadmapFilterBookId].passRanges.map((pr, idx) => ({ passInfo: PASS_INFO[idx], ...pr }))
+            : schedule.overallRoadmap);
+
+      return `
+        <div class="stack-md">
+          <!-- Filter Selector: Overall or Specific Book -->
+          <div class="card card-compact">
+            <label class="form-label" style="margin-bottom:5px;">نمایش نقشه راه برای:</label>
+            <select onchange="roadmapFilterBookId=this.value; renderApp();" class="form-select">
+              <option value="all" ${roadmapFilterBookId === 'all' ? 'selected' : ''}>کل پروژه (تمام دروس و منابع)</option>
+              ${allBooks.map(b => `
+                <option value="${b.id}" ${roadmapFilterBookId === b.id ? 'selected' : ''}>
+                  ${escapeHtml(b.courseName)} — ${escapeHtml(b.title)} (${toFaNum(b.totalPages)} ص)
+                </option>
+              `).join('')}
+            </select>
+          </div>
+
+          <!-- 4-Pass Weighted Timeline -->
+          <section class="card">
+            <div class="flex-between" style="margin-bottom:14px;">
+              <h3 class="h3-title">تایم‌لاین ۴ دور تا ددلاین</h3>
+              <span class="badge badge-cyan">وزن‌دهی ۴۵ / ۲۵ / ۱۷ / ۱۳٪</span>
+            </div>
+
+            <div class="timeline-wrap">
+              <div class="timeline-line"></div>
+              ${selectedRoadmap.map(item => {
+                const p = item.passInfo;
+                const durationDays = (item.start && item.end)
+                  ? diffDaysJalaliInclusive(item.start, item.end)
+                  : 0;
+                return `
+                  <div class="timeline-node">
+                    <div class="timeline-dot" style="background:${p.hex};"></div>
+                    <div class="inner-row" style="display:block;">
+                      <div class="flex-between" style="margin-bottom:4px;">
+                        <span class="badge ${p.badgeClass}">${p.label}</span>
+                        <span class="text-xxs font-bold" style="color:var(--text-muted);">سهم زمانی: ${toFaNum(p.sharePct)}٪</span>
+                      </div>
+                      ${item.done ? `
+                        <p class="text-xs font-extrabold" style="color:var(--emerald);">✓ این دور به‌طور کامل انجام شده است</p>
+                      ` : (item.start && item.end) ? `
+                        <div class="flex-between" style="margin-top:5px;">
+                          <span class="text-xs font-bold" style="color:#fff;">
+                            ${formatJalaliDisplay(item.start)} <span style="color:var(--text-dim);">تا</span> ${formatJalaliDisplay(item.end)}
+                          </span>
+                          <span class="text-xxs font-bold" style="color:${p.hex};">${toFaNum(durationDays)} روز</span>
+                        </div>
+                      ` : `
+                        <p class="subtext">هنوز منبعی برای زمان‌بندی ثبت نشده است</p>
+                      `}
+                    </div>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          </section>
+
+          <!-- Per-Book Compact Roadmap Cards -->
+          ${allBooks.length > 0 ? `
+            <div class="stack-sm">
+              <h3 class="text-xs font-extrabold" style="color:var(--text-secondary);">زمان‌بندی تفکیکی هر کتاب</h3>
+              ${allBooks.map(b => {
+                const rm = schedule.bookRoadmaps[b.id];
+                if (!rm) return '';
+                return `
+                  <div class="card card-compact stack-xs">
+                    <div class="flex-between">
+                      <div style="min-width:0;">
+                        <span class="text-xxs font-bold" style="color:${b.colorMeta.textColor};">${escapeHtml(b.courseName)}</span>
+                        <div class="text-xs font-extrabold truncate">${escapeHtml(b.title)}</div>
+                      </div>
+                      <span class="text-xxs font-bold" style="color:var(--text-muted); flex-shrink:0;">${toFaNum(b.totalPages)} ص × ۴</span>
+                    </div>
+                    <div class="grid-2" style="gap:6px; margin-top:4px;">
+                      ${rm.passRanges.map((pr, idx) => `
+                        <div style="padding:6px 8px; border-radius:10px; background:rgba(7,11,20,0.7); border:1px solid rgba(30,41,59,0.8);">
+                          <div class="text-xxs font-extrabold" style="color:${PASS_INFO[idx].hex};">${PASS_INFO[idx].short}</div>
+                          <div class="text-xxs" style="color:var(--text-secondary); margin-top:2px;">
+                            ${pr.done ? 'تکمیل ✓' : (pr.start ? `${formatJalaliShort(pr.start)} تا ${formatJalaliShort(pr.end)}` : '—')}
+                          </div>
+                        </div>
+                      `).join('')}
+                    </div>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          ` : ''}
+        </div>
+      `;
+    }
+
+    /** Sub-Tab 2.2: تقویم ماهانه هجری شمسی تعاملی */
+    function changeCalendarMonth(delta) {
+      let m = calViewMonth + delta;
+      let y = calViewYear;
+      if (m > 12) { m = 1; y++; }
+      else if (m < 1) { m = 12; y--; }
+      calViewYear = y;
+      calViewMonth = m;
+      renderApp();
+    }
+
+    function selectCalendarDay(jKey) {
+      calSelectedDate = jKey;
+      renderApp();
+    }
+
+    function renderMonthlySubTab(schedule) {
+      if (!calViewYear || !calViewMonth) {
+        const cur = parseJalaliKey(schedule.todayJKey);
+        calViewYear = cur.jy;
+        calViewMonth = cur.jm;
+      }
+      if (!calSelectedDate) calSelectedDate = schedule.todayJKey;
+
+      const monthLen = jalaliMonthLength(calViewYear, calViewMonth);
+      const firstDayJdn = j2d(calViewYear, calViewMonth, 1);
+      const startOffset = persianWeekdayIndex(firstDayJdn); // 0=شنبه .. 6=جمعه
+
+      const cells = [];
+      for (let i = 0; i < startOffset; i++) {
+        cells.push(`<div class="cal-cell empty"></div>`);
+      }
+
+      const examsByDate = {};
+      state.exams.forEach(ex => {
+        if (!examsByDate[ex.date]) examsByDate[ex.date] = [];
+        examsByDate[ex.date].push(ex);
+      });
+
+      for (let d = 1; d <= monthLen; d++) {
+        const jKey = toJalaliKey(calViewYear, calViewMonth, d);
+        const dayPlan = schedule.dayMap[jKey];
+        const isToday = jKey === schedule.todayJKey;
+        const isDeadline = jKey === schedule.deadlineJKey;
+        const isSelected = jKey === calSelectedDate;
+        const dayExams = examsByDate[jKey] || [];
+
+        const logObj = state.dailyLogs[jKey];
+        const loggedSum = logObj ? Object.values(logObj).reduce((s, v) => s + (Number(v) || 0), 0) : 0;
+        const isPast = jalaliKeyToJDN(jKey) < jalaliKeyToJDN(schedule.todayJKey);
+        const isAfterDeadline = jalaliKeyToJDN(jKey) > jalaliKeyToJDN(schedule.deadlineJKey);
+
+        const passColor = (dayPlan && dayPlan.dominantPass !== null) ? PASS_INFO[dayPlan.dominantPass].hex : null;
+
+        cells.push(`
+          <button type="button" onclick="selectCalendarDay('${jKey}')"
+            class="cal-cell ${isToday ? 'is-today' : ''} ${isDeadline ? 'is-deadline' : ''} ${isSelected ? 'selected' : ''} ${(isPast && loggedSum === 0) || isAfterDeadline ? 'outside' : ''}">
+            <span class="cal-day-num">${toFaNum(d)}</span>
+            ${dayPlan && dayPlan.totalPages > 0 ? `
+              <span class="cal-pages-tag" style="color:${passColor}; background:rgba(255,255,255,0.06);">${toFaNum(dayPlan.totalPages)}ص</span>
+            ` : loggedSum > 0 ? `
+              <span class="cal-pages-tag" style="color:var(--emerald);">✓${toFaNum(loggedSum)}</span>
+            ` : `<span class="text-xxs" style="color:transparent;">.</span>`}
+            <div class="cal-indicators">
+              ${passColor ? `<span class="cal-pass-bar" style="background:${passColor};"></span>` : ''}
+              ${dayExams.length > 0 ? `<span class="dot dot-amber" style="width:6px;height:6px;"></span>` : ''}
+              ${loggedSum > 0 && (!dayPlan || loggedSum >= dayPlan.totalPages) ? `<span style="font-size:8px; color:var(--emerald); font-weight:900;">✓</span>` : ''}
+            </div>
+          </button>
+        `);
+      }
+
+      // Details panel for selected day
+      const selPlan = schedule.dayMap[calSelectedDate];
+      const selExams = examsByDate[calSelectedDate] || [];
+      const selLogs = state.dailyLogs[calSelectedDate] || {};
+      const selLoggedEntries = Object.entries(selLogs).filter(([, v]) => v > 0);
+
+      return `
+        <div class="stack-md">
+          <section class="card card-compact">
+            <!-- Month Navigation Header -->
+            <div class="flex-between" style="margin-bottom:12px;">
+              <button onclick="changeCalendarMonth(-1)" class="icon-btn" aria-label="ماه قبل">
+                <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+              </button>
+              <div style="text-align:center;">
+                <div class="h3-title">${JALALI_MONTHS[calViewMonth - 1]} ${toFaNum(calViewYear)}</div>
+                <button onclick="const t=parseJalaliKey(getActiveJKey()); calViewYear=t.jy; calViewMonth=t.jm; calSelectedDate=getActiveJKey(); renderApp();" class="text-xxs font-bold" style="color:var(--cyan);">پرش به امروز</button>
+              </div>
+              <button onclick="changeCalendarMonth(1)" class="icon-btn" aria-label="ماه بعد">
+                <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+              </button>
+            </div>
+
+            <!-- Weekdays Header -->
+            <div class="cal-weekdays">
+              ${JALALI_WEEKDAY_SHORT.map(w => `<div>${w}</div>`).join('')}
+            </div>
+
+            <!-- Days Grid -->
+            <div class="cal-grid">
+              ${cells.join('')}
+            </div>
+
+            <!-- Legend -->
+            <div class="flex-wrap" style="justify-content:center; margin-top:11px; padding-top:9px; border-top:1px solid rgba(30,41,59,0.75); font-size:10px; color:var(--text-muted);">
+              <span><i class="dot dot-cyan" style="width:6px;height:6px;"></i> مطالعه</span>
+              <span><i class="dot dot-indigo" style="width:6px;height:6px;"></i> مرور ۱</span>
+              <span><i class="dot dot-amber" style="width:6px;height:6px;"></i> مرور ۲ / آزمون</span>
+              <span><i class="dot dot-emerald" style="width:6px;height:6px;"></i> مرور ۳</span>
+              <span><i class="dot dot-rose" style="width:6px;height:6px;"></i> ددلاین</span>
+            </div>
+          </section>
+
+          <!-- Selected Day Detail Panel -->
+          <section class="card card-compact stack-sm">
+            <div class="flex-between">
+              <div>
+                <p class="text-xxs font-bold" style="color:var(--cyan);">جزئیات روز انتخابی</p>
+                <h3 class="h3-title">${formatJalaliDisplay(calSelectedDate, true)}</h3>
+              </div>
+              ${selPlan ? `<span class="badge badge-indigo">${toFaNum(selPlan.totalPages)} صفحه</span>` : ''}
+            </div>
+
+            ${selExams.map(ex => `
+              <div class="alert-box alert-amber">
+                📝 <strong>آزمون:</strong> ${escapeHtml(ex.title)} (${toFaNum(ex.durationHours)} ساعت)
+              </div>
+            `).join('')}
+
+            ${selPlan && selPlan.tasks.length > 0 ? `
+              <div class="stack-xs">
+                ${selPlan.tasks.map(t => `
+                  <div class="inner-row">
+                    <div style="min-width:0;">
+                      <div class="flex-wrap" style="margin-bottom:2px;">
+                        <span class="dot ${t.colorMeta.dot}"></span>
+                        <span class="text-xxs font-bold" style="color:${t.colorMeta.textColor};">${escapeHtml(t.courseName)}</span>
+                        <span class="badge ${t.slice.passInfo.badgeClass}">${t.slice.passInfo.short}</span>
+                      </div>
+                      <p class="text-xs font-bold truncate">${escapeHtml(t.bookTitle)}</p>
+                      <p class="text-xxs" style="color:var(--text-muted);">${t.slice.rangeText}</p>
+                    </div>
+                    <span class="text-xs font-extrabold" style="color:var(--cyan); flex-shrink:0;">${toFaNum(t.targetPages)} ص</span>
+                  </div>
+                `).join('')}
+              </div>
+            ` : selLoggedEntries.length > 0 ? `
+              <div class="stack-xs">
+                <p class="text-xxs font-bold" style="color:var(--emerald);">گزارش مطالعه انجام‌شده در این روز:</p>
+                ${selLoggedEntries.map(([bid, pages]) => {
+                  const b = findBookById(bid);
+                  return `<div class="inner-row"><span class="text-xs font-bold truncate">${b ? escapeHtml(b.title) : 'منبع'}</span><span class="badge badge-emerald">${toFaNum(pages)} صفحه</span></div>`;
+                }).join('')}
+              </div>
+            ` : `
+              <p class="subtext" style="text-align:center; padding:10px;">
+                ${jalaliKeyToJDN(calSelectedDate) > jalaliKeyToJDN(schedule.deadlineJKey)
+                  ? 'این تاریخ بعد از ددلاین تعیین‌شده است.'
+                  : 'برنامه مطالعه‌ای برای این تاریخ ثبت نشده است.'}
+              </p>
+            `}
+          </section>
+        </div>
+      `;
+    }
+
+    /** Sub-Tab 2.3: نمای هفتگی (Next 7 Days) */
+    function renderWeeklySubTab(schedule) {
+      const next7 = schedule.days.slice(0, 7);
+      if (next7.length === 0) {
+        return `<div class="card card-compact" style="text-align:center; padding:24px;"><p class="subtext">برنامه‌ای برای ۷ روز آینده وجود ندارد.</p></div>`;
+      }
+
+      return `
+        <div class="stack-sm">
+          ${next7.map((day, idx) => `
+            <div class="card card-compact stack-xs">
+              <div class="flex-between">
+                <div>
+                  <div class="flex-wrap">
+                    <span class="h3-title">${formatJalaliDisplay(day.jKey, true)}</span>
+                    ${idx === 0 ? `<span class="badge badge-cyan">امروز</span>` : idx === 1 ? `<span class="badge badge-indigo">فردا</span>` : ''}
+                  </div>
+                  <p class="text-xxs" style="color:var(--text-muted); margin-top:2px;">
+                    ظرفیت مطالعه: ${toFaNum(Math.round(day.weight * 100))}٪
+                    ${day.exams.length > 0 ? ` • ${toFaNum(day.exams.length)} آزمون` : ''}
+                  </p>
+                </div>
+                <span class="badge ${day.dominantPass !== null ? PASS_INFO[day.dominantPass].badgeClass : 'badge-cyan'}" style="font-size:11px; padding:4px 9px;">
+                  ${toFaNum(day.totalPages)} صفحه
+                </span>
+              </div>
+
+              ${day.exams.map(ex => `
+                <div class="alert-box alert-amber" style="padding:6px 10px;">
+                  📝 آزمون: <strong>${escapeHtml(ex.title)}</strong> (${toFaNum(ex.durationHours)} ساعت)
+                </div>
+              `).join('')}
+
+              ${day.tasks.length === 0 ? `
+                <p class="text-xxs" style="color:var(--text-dim); padding:4px 0;">بدون سهمیه مطالعه در این روز</p>
+              ` : `
+                <div class="stack-xs" style="padding-top:4px; border-top:1px solid rgba(30,41,59,0.75);">
+                  ${day.tasks.map(t => `
+                    <div class="flex-between text-xs">
+                      <div class="flex-center" style="justify-content:flex-start; min-width:0;">
+                        <span class="dot ${t.colorMeta.dot}"></span>
+                        <span class="truncate" style="color:var(--text-secondary);">${escapeHtml(t.bookTitle)}</span>
+                        <span class="badge ${t.slice.passInfo.badgeClass}" style="padding:1px 6px;">${t.slice.passInfo.short}</span>
+                      </div>
+                      <span class="font-extrabold" style="color:var(--cyan); flex-shrink:0;">${toFaNum(t.targetPages)} ص</span>
+                    </div>
+                  `).join('')}
+                </div>
+              `}
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    /* -----------------------------------------------------------------------
+     * TAB 3: دروس و منابع
+     * ----------------------------------------------------------------------- */
+    function renderCoursesTab() {
+      let html = `
+        <div class="stack-md animate-tab">
+          <div class="flex-between">
+            <div>
+              <h2 class="h2-title">دروس و منابع درسی</h2>
+              <p class="subtext">هر کتاب به‌صورت خودکار ۴ دور (۱ مطالعه + ۳ مرور) تنظیم می‌شود</p>
+            </div>
+            <button onclick="openCourseModal()" class="btn btn-primary btn-sm" style="flex-shrink:0;">+ درس جدید</button>
+          </div>
+
+          <div class="card card-compact flex-between">
+            <div class="flex-center" style="justify-content:flex-start; min-width:0;">
+              <span>⚡</span>
+              <span class="subtext font-bold truncate" style="color:var(--text-secondary);">چارت کامل مهندسی برق (۷ درس)</span>
+            </div>
+            <div class="flex-center" style="gap:6px; flex-shrink:0;">
+              <button onclick="confirmLoadFullEESample()" class="btn btn-indigo btn-sm">بارگذاری چارت برق</button>
+              ${state.courses.length > 0 ? `<button onclick="confirmClearAllCourses()" class="btn btn-rose btn-sm">پاکسازی</button>` : ''}
+            </div>
+          </div>
+      `;
+
+      if (state.courses.length === 0) {
+        html += `
+          <div class="card" style="text-align:center; padding:30px 16px;">
+            <p class="h3-title" style="margin-bottom:6px;">لیست دروس خالی است</p>
+            <p class="subtext">دروس دلخواه خود را اضافه کنید یا چارت مهندسی برق را با یک کلیک بارگذاری نمایید.</p>
+          </div>
+        `;
+      } else {
+        for (const course of state.courses) {
+          const color = getColorMeta(course.color);
+          const cTotal = course.books.reduce((s, b) => s + b.totalPages * 4, 0);
+          const cDone = course.books.reduce((s, b) => s + Math.min(b.totalPages * 4, b.completedUnits), 0);
+          const cPct = cTotal > 0 ? Math.round((cDone / cTotal) * 100) : 0;
+
+          html += `
+            <div class="card stack-sm">
+              <div class="flex-between">
+                <div class="flex-center" style="justify-content:flex-start; min-width:0;">
+                  <span class="dot ${color.dot}" style="width:10px; height:10px;"></span>
+                  <div style="min-width:0;">
+                    <h3 class="h3-title truncate">${escapeHtml(course.name)}</h3>
+                    <p class="subtext">${toFaNum(course.books.length)} منبع • پیشرفت ۴ دور: ${toFaNum(cPct)}٪</p>
+                  </div>
+                </div>
+                <div class="flex-center" style="gap:5px; flex-shrink:0;">
+                  <button onclick="openCourseModal('${course.id}')" class="icon-btn" style="width:30px; height:30px;" aria-label="ویرایش درس">
+                    <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+                  </button>
+                  <button onclick="confirmDeleteCourse('${course.id}')" class="icon-btn" style="width:30px; height:30px; color:var(--rose); border-color:var(--rose-border); background:var(--rose-bg);" aria-label="حذف درس">
+                    <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                  </button>
+                </div>
+              </div>
+
+              <div class="progress-track progress-track-sm">
+                <div class="progress-fill ${color.fill}" style="width:${cPct}%"></div>
+              </div>
+
+              <div class="stack-xs">
+                ${course.books.length === 0 ? `<p class="subtext" style="text-align:center; padding:8px;">هنوز کتاب یا منبعی ثبت نشده است.</p>` : ''}
+                ${course.books.map(book => {
+                  const maxU = book.totalPages * 4;
+                  const pct = maxU > 0 ? Math.round((Math.min(maxU, book.completedUnits) / maxU) * 100) : 0;
+                  const curPass = book.completedUnits >= maxU
+                    ? 'تکمیل ۴ دور ✓'
+                    : PASS_INFO[Math.min(3, Math.floor(book.completedUnits / book.totalPages))].label;
+
+                  return `
+                    <div class="inner-row">
+                      <div style="min-width:0; flex:1;">
+                        <p class="text-xs font-bold truncate">${escapeHtml(book.title)}</p>
+                        <div class="flex-wrap" style="margin-top:3px;">
+                          <span class="text-xxs" style="color:var(--text-muted);">${toFaNum(book.totalPages)} ص (کل ۴ دور: ${toFaNum(maxU)} ص)</span>
+                          <span class="text-xxs" style="color:var(--text-dim);">•</span>
+                          <span class="text-xxs font-bold" style="color:var(--cyan);">${curPass} (${toFaNum(pct)}٪)</span>
+                        </div>
+                      </div>
+                      <div class="flex-center" style="gap:5px; flex-shrink:0;">
+                        <button onclick="openBookModal('${course.id}', '${book.id}')" class="icon-btn" style="width:28px; height:28px;" aria-label="ویرایش منبع">
+                          <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                        </button>
+                        <button onclick="confirmDeleteBook('${course.id}', '${book.id}')" class="icon-btn" style="width:28px; height:28px; color:var(--rose); background:var(--rose-bg); border-color:var(--rose-border);" aria-label="حذف منبع">
+                          <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+                        </button>
+                      </div>
+                    </div>
+                  `;
+                }).join('')}
+              </div>
+
+              <button onclick="openBookModal('${course.id}')" class="btn-dashed">
+                + افزودن منبع / کتاب به ${escapeHtml(course.name)}
+              </button>
+            </div>
+          `;
+        }
+      }
+
+      html += `</div>`;
+      return html;
+    }
+
+    /* -----------------------------------------------------------------------
+     * TAB 4: آزمون‌ها
+     * ----------------------------------------------------------------------- */
+    function renderExamsTab() {
+      const todayJdn = jalaliKeyToJDN(getActiveJKey());
+      const sortedExams = [...state.exams].sort((a, b) => jalaliKeyToJDN(a.date) - jalaliKeyToJDN(b.date));
+      const upcoming = sortedExams.filter(e => !e.completed && jalaliKeyToJDN(e.date) >= todayJdn);
+      const pastOrDone = sortedExams.filter(e => e.completed || jalaliKeyToJDN(e.date) < todayJdn);
+
+      return `
+        <div class="stack-md animate-tab">
+          <div>
+            <h2 class="h2-title">مدیریت آزمون‌ها</h2>
+            <p class="subtext">ظرفیت مطالعه در روز آزمون بر اساس ساعت آزمون کاهش یافته و در سایر روزها توزیع می‌شود</p>
+          </div>
+
+          <div class="grid-2">
+            <button onclick="openSingleExamModal()" class="card card-compact" style="text-align:right; border-color:var(--cyan-border); background:linear-gradient(135deg, rgba(34,211,238,0.14), rgba(99,102,241,0.12));">
+              <div class="badge badge-cyan" style="margin-bottom:7px; font-size:13px;">+</div>
+              <div class="text-xs font-extrabold">افزودن آزمون تکی</div>
+              <div class="text-xxs" style="color:var(--text-muted); margin-top:2px;">تاریخ شمسی و مدت به ساعت</div>
+            </button>
+
+            <button onclick="openBatchExamsModal()" class="card card-compact" style="text-align:right; border-color:var(--amber-border); background:linear-gradient(135deg, rgba(245,158,11,0.15), rgba(244,63,94,0.12));">
+              <div class="badge badge-amber" style="margin-bottom:7px;">تولید دوره‌ای</div>
+              <div class="text-xs font-extrabold">سری آزمون‌ها تا ددلاین</div>
+              <div class="text-xxs" style="color:var(--text-muted); margin-top:2px;">مثلاً هر ۱۴ روز یک‌بار</div>
+            </button>
+          </div>
+
+          <div class="stack-sm">
+            <div class="flex-between">
+              <h3 class="text-xs font-extrabold" style="color:var(--text-secondary);">آزمون‌های پیش‌رو (${toFaNum(upcoming.length)})</h3>
+              ${state.exams.length > 0 ? `<button onclick="confirmClearExams()" class="text-xxs font-bold" style="color:var(--rose);">حذف همه</button>` : ''}
+            </div>
+
+            ${upcoming.length === 0 ? `
+              <div class="card card-compact" style="text-align:center; padding:22px;">
+                <p class="subtext">هیچ آزمون پیش‌رویی ثبت نشده است.</p>
+              </div>
+            ` : upcoming.map(ex => {
+              const daysRem = jalaliKeyToJDN(ex.date) - todayJdn;
+              const weightPct = Math.round(getDayWeight(ex.date) * 100);
+              return `
+                <div class="card card-compact flex-between">
+                  <div class="flex-center" style="justify-content:flex-start; min-width:0;">
+                    <button onclick="toggleExamDone('${ex.id}')" class="check-box" style="width:24px; height:24px; border-color:var(--amber); margin-top:0;" aria-label="تکمیل آزمون"></button>
+                    <div style="min-width:0;">
+                      <p class="text-xs font-extrabold truncate">${escapeHtml(ex.title)}</p>
+                      <div class="flex-wrap" style="margin-top:3px;">
+                        <span class="text-xxs font-bold" style="color:var(--amber);">${formatJalaliDisplay(ex.date, true)}</span>
+                        <span class="badge badge-cyan" style="padding:1px 6px;">${daysRem === 0 ? 'امروز' : `${toFaNum(daysRem)} روز دیگر`}</span>
+                      </div>
+                      <p class="text-xxs" style="color:var(--text-muted); margin-top:2px;">مدت: ${toFaNum(ex.durationHours)} ساعت • ظرفیت مطالعه آن روز: ${toFaNum(weightPct)}٪</p>
+                    </div>
+                  </div>
+                  <button onclick="deleteExam('${ex.id}')" class="icon-btn" style="width:28px; height:28px; color:var(--rose); background:var(--rose-bg); border-color:var(--rose-border); flex-shrink:0;" aria-label="حذف آزمون">
+                    <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+                  </button>
+                </div>
+              `;
+            }).join('')}
+          </div>
+
+          ${pastOrDone.length > 0 ? `
+            <div class="stack-xs" style="padding-top:4px;">
+              <h3 class="text-xs font-bold" style="color:var(--text-muted);">آزمون‌های گذشته / انجام‌شده (${toFaNum(pastOrDone.length)})</h3>
+              ${pastOrDone.map(ex => `
+                <div class="inner-row" style="opacity:0.72;">
+                  <div class="flex-center" style="justify-content:flex-start; min-width:0;">
+                    <button onclick="toggleExamDone('${ex.id}')" class="check-box ${ex.completed ? 'checked' : ''}" style="width:22px; height:22px; margin-top:0;">
+                      ${ex.completed ? `<svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>` : ''}
+                    </button>
+                    <div style="min-width:0;">
+                      <p class="text-xs font-bold ${ex.completed ? 'line-through' : ''} truncate">${escapeHtml(ex.title)}</p>
+                      <p class="text-xxs" style="color:var(--text-dim);">${formatJalaliDisplay(ex.date)} • ${toFaNum(ex.durationHours)} ساعت</p>
+                    </div>
+                  </div>
+                  <button onclick="deleteExam('${ex.id}')" class="subtext" style="color:var(--text-dim);">✕</button>
+                </div>
+              `).join('')}
+            </div>
+          ` : ''}
+        </div>
+      `;
+    }
+
+    /* -----------------------------------------------------------------------
+     * TAB 5: آمار و تنظیمات
+     * ----------------------------------------------------------------------- */
+    function renderSettingsTab(schedule) {
+      const stats = computeOverallStats();
+      const radius = 48;
+      const circumference = 2 * Math.PI * radius;
+      const dashOffset = circumference - (stats.overallPercent / 100) * circumference;
+
+      return `
+        <div class="stack-md animate-tab">
+          <!-- Overall Progress Dashboard -->
+          <section class="card stack-sm">
+            <h2 class="h3-title">داشبورد پیشرفت کل پروژه (۴ دور)</h2>
+            <div class="flex-center" style="justify-content:flex-start; gap:14px;">
+              <div class="ring-wrap">
+                <svg class="ring-svg" viewBox="0 0 116 116">
+                  <circle cx="58" cy="58" r="${radius}" fill="none" stroke="#1e293b" stroke-width="10" />
+                  <circle cx="58" cy="58" r="${radius}" fill="none" stroke="url(#gradRing)" stroke-width="10"
+                    stroke-linecap="round" stroke-dasharray="${circumference}" stroke-dashoffset="${dashOffset}" />
+                  <defs>
+                    <linearGradient id="gradRing" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stop-color="#22d3ee" />
+                      <stop offset="50%" stop-color="#6366f1" />
+                      <stop offset="100%" stop-color="#10b981" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+                <div class="ring-center">
+                  <span style="font-size:21px; font-weight:900; color:#fff;">${toFaNum(stats.overallPercent)}٪</span>
+                  <span class="text-xxs" style="color:var(--text-muted);">پیشرفت کل</span>
+                </div>
+              </div>
+
+              <div class="stack-xs" style="flex:1;">
+                <div class="stat-box" style="text-align:right; padding:7px 10px;">
+                  <div class="stat-label">صفحات خوانده‌شده از ۴ دور</div>
+                  <div class="stat-val" style="color:var(--cyan);">${toFaNum(stats.completedUnitsAll)} <span style="color:var(--text-muted); font-weight:400; font-size:11px;">از ${toFaNum(stats.totalUnitsAll)}</span></div>
+                </div>
+                <div class="stat-box" style="text-align:right; padding:7px 10px;">
+                  <div class="stat-label">میانگین سرعت واقعی شما</div>
+                  <div class="stat-val" style="color:var(--emerald);">${stats.activeDays > 0 ? `${toFaNum(stats.realAvgSpeed)} ص/روز (${toFaNum(stats.activeDays)} روز ثبت‌شده)` : 'هنوز ثبت نشده'}</div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Per-Course & Per-Book 4-Pass Breakdown -->
+          <section class="card stack-sm">
+            <div class="flex-between">
+              <h3 class="h3-title">وضعیت تفکیکی ۴ دور هر منبع</h3>
+              <div class="flex-wrap text-xxs" style="color:var(--text-muted);">
+                <span><i class="dot dot-cyan" style="width:6px;height:6px;"></i> مطالعه</span>
+                <span><i class="dot dot-indigo" style="width:6px;height:6px;"></i> م۱</span>
+                <span><i class="dot dot-amber" style="width:6px;height:6px;"></i> م۲</span>
+                <span><i class="dot dot-emerald" style="width:6px;height:6px;"></i> م۳</span>
+              </div>
+            </div>
+
+            ${state.courses.length === 0 ? `<p class="subtext" style="text-align:center; padding:12px;">هنوز درسی ثبت نشده است.</p>` : ''}
+            ${state.courses.map(course => {
+              const color = getColorMeta(course.color);
+              const cTotal = course.books.reduce((s, b) => s + b.totalPages * 4, 0);
+              const cDone = course.books.reduce((s, b) => s + Math.min(b.totalPages * 4, b.completedUnits), 0);
+              const cPct = cTotal > 0 ? Math.round((cDone / cTotal) * 100) : 0;
+
+              return `
+                <div class="stack-xs" style="padding-bottom:10px; border-bottom:1px solid rgba(30,41,59,0.75);">
+                  <div class="flex-between">
+                    <span class="text-xs font-extrabold" style="color:${color.textColor};">${escapeHtml(course.name)}</span>
+                    <span class="text-xxs font-bold" style="color:var(--text-secondary);">${toFaNum(cPct)}٪</span>
+                  </div>
+
+                  ${course.books.map(book => {
+                    const pLen = book.totalPages;
+                    const segs = [0, 1, 2, 3].map(idx => {
+                      const segDone = Math.max(0, Math.min(pLen, book.completedUnits - idx * pLen));
+                      return pLen > 0 ? Math.round((segDone / pLen) * 100) : 0;
+                    });
+                    const totalBookPct = Math.round((Math.min(pLen * 4, book.completedUnits) / (pLen * 4)) * 100);
+
+                    return `
+                      <div class="inner-row" style="display:block;">
+                        <div class="flex-between" style="margin-bottom:6px;">
+                          <span class="text-xxs font-bold truncate" style="max-width:78%;">${escapeHtml(book.title)}</span>
+                          <span class="text-xxs font-bold" style="color:var(--text-muted);">${toFaNum(totalBookPct)}٪</span>
+                        </div>
+                        <div class="grid-4">
+                          ${segs.map((pct, i) => `
+                            <div class="progress-track progress-track-sm" title="${PASS_INFO[i].label}: ${toFaNum(pct)}٪">
+                              <div class="progress-fill ${PASS_INFO[i].barClass}" style="width:${pct}%"></div>
+                            </div>
+                          `).join('')}
+                        </div>
+                      </div>
+                    `;
+                  }).join('')}
+                </div>
+              `;
+            }).join('')}
+          </section>
+
+          <!-- Jalali Deadline Settings & Offline Backup -->
+          <section class="card stack-md">
+            <h3 class="h3-title">تنظیم ددلاین شمسی و پشتیبان‌گیری آفلاین</h3>
+
+            <div class="stack-xs">
+              <label class="form-label">تاریخ ددلاین کل پروژه</label>
+              ${renderJalaliPickerHTML('settings-deadline', state.settings.deadline, true)}
+              <button onclick="saveSettingsDeadline()" class="btn btn-primary btn-full" style="margin-top:8px;">
+                ذخیره ددلاین شمسی و بازمحاسبه کل برنامه
+              </button>
+            </div>
+
+            <div class="stack-xs" style="padding-top:12px; border-top:1px solid rgba(30,41,59,0.8);">
+              <p class="text-xs font-bold" style="color:var(--text-secondary);">پشتیبان‌گیری و بازیابی کامل آفلاین (JSON)</p>
+              <div class="grid-2">
+                <button onclick="exportBackupJSON()" class="btn btn-emerald">⬇ دانلود بکاپ</button>
+                <button onclick="document.getElementById('import-file-input').click()" class="btn btn-indigo">⬆ بازیابی بکاپ</button>
+              </div>
+            </div>
+
+            <div class="grid-2" style="padding-top:10px; border-top:1px solid rgba(30,41,59,0.8);">
+              <button onclick="confirmResetProgressOnly()" class="btn btn-ghost">صفر کردن پیشرفت‌ها</button>
+              <button onclick="confirmFullFactoryReset()" class="btn btn-rose">بازنشانی کل داده‌ها</button>
+            </div>
+          </section>
+        </div>
+      `;
+    }
+
+    /*************************************************************************
+     * 7. MODALS: DEADLINE, COURSE, BOOK, EXAMS & CUSTOM CONFIRM
+     *************************************************************************/
+    function openModal(title, bodyHtml) {
+      document.getElementById('modal-title').textContent = title;
+      document.getElementById('modal-body').innerHTML = bodyHtml;
+      document.getElementById('modal-backdrop').classList.add('open');
+    }
+
+    function closeModal() {
+      document.getElementById('modal-backdrop').classList.remove('open');
+    }
+
+    document.getElementById('modal-backdrop').addEventListener('click', (e) => {
+      if (e.target.id === 'modal-backdrop') closeModal();
+    });
+
+    function openDeadlineModal() {
+      openModal('تنظیم ددلاین کل پروژه (شمسی)', `
+        <div class="stack-md">
+          <p class="subtext">تاریخ ددلاین را به هجری شمسی انتخاب کنید تا نقشه راه ۴ دور، تقویم ماهانه و سهمیه روزانه تمام منابع به‌صورت خودکار تنظیم شوند.</p>
+          ${renderJalaliPickerHTML('modal-deadline', state.settings.deadline, true)}
+          <div class="flex-between" style="padding-top:4px;">
+            <button onclick="saveModalDeadline()" class="btn btn-primary" style="flex:1;">ثبت ددلاین جدید</button>
+            <button onclick="closeModal()" class="btn btn-ghost">انصراف</button>
+          </div>
+        </div>
+      `);
+    }
+
+    function saveModalDeadline() {
+      const val = getJalaliPickerValue('modal-deadline');
+      if (!val) return;
+      state.settings.deadline = val;
+      saveState();
+      closeModal();
+      showToast(`ددلاین به ${formatJalaliDisplay(val)} تغییر یافت`, 'success');
+      renderApp();
+    }
+
+    function saveSettingsDeadline() {
+      const val = getJalaliPickerValue('settings-deadline');
+      if (!val) return;
+      state.settings.deadline = val;
+      saveState();
+      showToast(`ددلاین به ${formatJalaliDisplay(val)} به‌روزرسانی شد`, 'success');
+      renderApp();
+    }
+
+    function openCourseModal(courseId = null) {
+      const existing = courseId ? state.courses.find(c => c.id === courseId) : null;
+      const selectedColor = existing ? existing.color : COURSE_COLORS[state.courses.length % COURSE_COLORS.length].id;
+
+      openModal(existing ? 'ویرایش درس' : 'افزودن درس جدید', `
+        <div class="stack-md">
+          <div>
+            <label class="form-label">نام درس</label>
+            <input id="course-name-input" type="text" placeholder="مثلاً: الکترومغناطیس" value="${existing ? escapeHtml(existing.name) : ''}" class="form-input" />
+          </div>
+          <div>
+            <label class="form-label">رنگ برچسب درس</label>
+            <div class="flex-wrap">
+              ${COURSE_COLORS.map(c => `
+                <button type="button" onclick="selectCourseColor('${c.id}')" data-color="${c.id}"
+                  class="color-chip ${c.badge} ${c.id === selectedColor ? 'selected' : ''}">
+                  ${c.name}
+                </button>
+              `).join('')}
+            </div>
+            <input type="hidden" id="course-color-input" value="${selectedColor}" />
+          </div>
+          <div class="flex-between" style="padding-top:4px;">
+            <button onclick="saveCourse('${courseId || ''}')" class="btn btn-primary" style="flex:1;">${existing ? 'ذخیره تغییرات' : 'ایجاد درس'}</button>
+            <button onclick="closeModal()" class="btn btn-ghost">انصراف</button>
+          </div>
+        </div>
+      `);
+    }
+
+    function selectCourseColor(colorId) {
+      document.getElementById('course-color-input').value = colorId;
+      document.querySelectorAll('.color-chip').forEach(btn => {
+        btn.classList.toggle('selected', btn.getAttribute('data-color') === colorId);
+      });
+    }
+
+    function saveCourse(courseId) {
+      const name = document.getElementById('course-name-input').value.trim();
+      const color = document.getElementById('course-color-input').value;
+      if (!name) { showToast('لطفاً نام درس را وارد کنید', 'error'); return; }
+      if (courseId) {
+        const c = state.courses.find(x => x.id === courseId);
+        if (c) { c.name = name; c.color = color; }
+        showToast('درس با موفقیت ویرایش شد', 'success');
+      } else {
+        state.courses.push({ id: uid('c'), name, color, books: [] });
+        showToast(`درس «${name}» اضافه شد`, 'success');
+      }
+      saveState();
+      closeModal();
+      renderApp();
+    }
+
+    function openBookModal(courseId, bookId = null) {
+      const course = state.courses.find(c => c.id === courseId);
+      if (!course) return;
+      const existing = bookId ? course.books.find(b => b.id === bookId) : null;
+
+      let curPassIdx = 0;
+      let curPageInPass = 0;
+      if (existing && existing.completedUnits > 0) {
+        if (existing.completedUnits >= existing.totalPages * 4) {
+          curPassIdx = 3; curPageInPass = existing.totalPages;
+        } else {
+          curPassIdx = Math.floor(existing.completedUnits / existing.totalPages);
+          curPageInPass = existing.completedUnits % existing.totalPages;
+        }
+      }
+
+      openModal(existing ? 'ویرایش منبع / کتاب' : `افزودن منبع به ${course.name}`, `
+        <div class="stack-md">
+          <div>
+            <label class="form-label">نام کتاب یا جزوه</label>
+            <input id="book-title-input" type="text" placeholder="مثلاً: ریاضی مهندسی کرزیگ" value="${existing ? escapeHtml(existing.title) : ''}" class="form-input" />
+          </div>
+          <div>
+            <label class="form-label">تعداد کل صفحات کتاب</label>
+            <input id="book-pages-input" type="number" min="1" max="5000" placeholder="مثلاً: 250" value="${existing ? existing.totalPages : ''}" class="form-input" />
+          </div>
+          <div class="grid-2">
+            <div>
+              <label class="form-label">دور فعلی (اختیاری)</label>
+              <select id="book-pass-input" class="form-select">
+                ${PASS_INFO.map(p => `<option value="${p.index}" ${p.index === curPassIdx ? 'selected' : ''}>${p.label}</option>`).join('')}
+              </select>
+            </div>
+            <div>
+              <label class="form-label">صفحات خوانده‌شده در این دور</label>
+              <input id="book-done-pages-input" type="number" min="0" max="5000" value="${curPageInPass}" class="form-input" />
+            </div>
+          </div>
+          <div class="flex-between" style="padding-top:4px;">
+            <button onclick="saveBook('${courseId}', '${bookId || ''}')" class="btn btn-primary" style="flex:1;">${existing ? 'ذخیره تغییرات' : 'افزودن منبع'}</button>
+            <button onclick="closeModal()" class="btn btn-ghost">انصراف</button>
+          </div>
+        </div>
+      `);
+    }
+
+    function saveBook(courseId, bookId) {
+      const course = state.courses.find(c => c.id === courseId);
+      if (!course) return;
+      const title = document.getElementById('book-title-input').value.trim();
+      const totalPages = parseInt(document.getElementById('book-pages-input').value, 10);
+      const passIdx = Math.min(3, Math.max(0, parseInt(document.getElementById('book-pass-input').value, 10) || 0));
+      const doneInPass = Math.max(0, parseInt(document.getElementById('book-done-pages-input').value, 10) || 0);
+
+      if (!title || !totalPages || totalPages < 1) {
+        showToast('نام کتاب و تعداد صفحات معتبر وارد کنید', 'error');
+        return;
+      }
+
+      const completedUnits = Math.min(totalPages * 4, passIdx * totalPages + Math.min(totalPages, doneInPass));
+      if (bookId) {
+        const b = course.books.find(x => x.id === bookId);
+        if (b) { b.title = title; b.totalPages = totalPages; b.completedUnits = completedUnits; }
+        showToast('منبع ویرایش شد', 'success');
+      } else {
+        course.books.push({ id: uid('b'), title, totalPages, completedUnits });
+        showToast(`منبع «${title}» اضافه شد`, 'success');
+      }
+      saveState();
+      closeModal();
+      renderApp();
+    }
+
+    function openSingleExamModal() {
+      const defaultExamJKey = addDaysJalali(getActiveJKey(), 7);
+      openModal('افزودن آزمون تکی (شمسی)', `
+        <div class="stack-md">
+          <div>
+            <label class="form-label">عنوان آزمون</label>
+            <input id="exam-title-input" type="text" placeholder="مثلاً: آزمون جامع مرحله ۳" class="form-input" />
+          </div>
+          <div>
+            <label class="form-label">تاریخ آزمون (هجری شمسی)</label>
+            ${renderJalaliPickerHTML('exam-date-picker', defaultExamJKey, false)}
+          </div>
+          <div>
+            <label class="form-label">مدت آزمون (ساعت)</label>
+            <input id="exam-hours-input" type="number" step="0.5" min="0.5" max="12" value="3" class="form-input" />
+          </div>
+          <div class="flex-between" style="padding-top:4px;">
+            <button onclick="saveSingleExam()" class="btn btn-primary" style="flex:1;">ثبت آزمون</button>
+            <button onclick="closeModal()" class="btn btn-ghost">انصراف</button>
+          </div>
+        </div>
+      `);
+    }
+
+    function saveSingleExam() {
+      const title = document.getElementById('exam-title-input').value.trim();
+      const date = getJalaliPickerValue('exam-date-picker');
+      const durationHours = parseFloat(document.getElementById('exam-hours-input').value);
+      if (!title || !date || !durationHours || durationHours <= 0) {
+        showToast('لطفاً تمام فیلدهای آزمون را درست پر کنید', 'error');
+        return;
+      }
+      state.exams.push({ id: uid('ex'), title, date, durationHours, completed: false });
+      saveState();
+      closeModal();
+      showToast(`آزمون در تاریخ ${formatJalaliDisplay(date)} ثبت شد`, 'success');
+      renderApp();
+    }
+
+    function openBatchExamsModal() {
+      openModal('تولید خودکار سری آزمون‌های دوره‌ای', `
+        <div class="stack-md">
+          <p class="subtext">
+            فاصله زمانی آزمون‌ها را تعیین کنید تا به‌صورت منظم از امروز تا ددلاین (<strong>${formatJalaliDisplay(state.settings.deadline)}</strong>) در تقویم شمسی چیده شوند.
+          </p>
+          <div>
+            <label class="form-label">پیشوند عنوان آزمون‌ها</label>
+            <input id="batch-prefix-input" type="text" value="آزمون آزمایشی مرحله" class="form-input" />
+          </div>
+          <div class="grid-2">
+            <div>
+              <label class="form-label">فاصله هر آزمون (روز)</label>
+              <input id="batch-interval-input" type="number" min="2" max="90" value="14" class="form-input" />
+            </div>
+            <div>
+              <label class="form-label">مدت هر آزمون (ساعت)</label>
+              <input id="batch-hours-input" type="number" step="0.5" min="0.5" max="12" value="3" class="form-input" />
+            </div>
+          </div>
+          <div class="flex-between" style="padding-top:4px;">
+            <button onclick="generateBatchExams()" class="btn btn-amber" style="flex:1;">تولید و جاگذاری در تقویم</button>
+            <button onclick="closeModal()" class="btn btn-ghost">انصراف</button>
+          </div>
+        </div>
+      `);
+    }
+
+    function generateBatchExams() {
+      const prefix = document.getElementById('batch-prefix-input').value.trim() || 'آزمون مرحله';
+      const interval = parseInt(document.getElementById('batch-interval-input').value, 10);
+      const hours = parseFloat(document.getElementById('batch-hours-input').value);
+      if (!interval || interval < 2 || !hours || hours <= 0) {
+        showToast('فاصله روز و مدت آزمون معتبر وارد کنید', 'error');
+        return;
+      }
+
+      const startJdn = jalaliKeyToJDN(getActiveJKey());
+      const endJdn = jalaliKeyToJDN(state.settings.deadline);
+      let count = 0;
+      for (let jdn = startJdn + interval; jdn <= endJdn && count < 60; jdn += interval) {
+        count++;
+        const { jy, jm, jd } = d2j(jdn);
+        state.exams.push({
+          id: uid('ex'),
+          title: `${prefix} ${toFaNum(count)}`,
+          date: toJalaliKey(jy, jm, jd),
+          durationHours: hours,
+          completed: false
+        });
+      }
+
+      saveState();
+      closeModal();
+      showToast(`${toFaNum(count)} آزمون دوره‌ای (هر ${toFaNum(interval)} روز) تا ددلاین ثبت شد`, 'success');
+      renderApp();
+    }
+
+    function deleteExam(examId) {
+      state.exams = state.exams.filter(e => e.id !== examId);
+      saveState();
+      showToast('آزمون حذف شد', 'info');
+      renderApp();
+    }
+
+    function openConfirmModal(title, message, confirmLabel, onConfirmFn, danger = true) {
+      window._pendingConfirmAction = onConfirmFn;
+      openModal(title, `
+        <div class="stack-md">
+          <p class="text-xs" style="color:var(--text-secondary); line-height:1.8;">${message}</p>
+          <div class="flex-between" style="padding-top:4px;">
+            <button onclick="executePendingConfirm()" class="btn ${danger ? 'btn-rose-solid' : 'btn-primary'}" style="flex:1;">${confirmLabel}</button>
+            <button onclick="closeModal()" class="btn btn-ghost">انصراف</button>
+          </div>
+        </div>
+      `);
+    }
+
+    function executePendingConfirm() {
+      const fn = window._pendingConfirmAction;
+      closeModal();
+      if (typeof fn === 'function') fn();
+    }
+
+    function confirmDeleteCourse(courseId) {
+      const c = state.courses.find(x => x.id === courseId);
+      if (!c) return;
+      openConfirmModal('حذف درس', `آیا از حذف درس «${escapeHtml(c.name)}» و تمام کتاب‌های آن مطمئن هستید؟`, 'بله، حذف شود', () => {
+        state.courses = state.courses.filter(x => x.id !== courseId);
+        saveState();
+        showToast('درس حذف شد', 'info');
+        renderApp();
+      });
+    }
+
+    function confirmDeleteBook(courseId, bookId) {
+      const c = state.courses.find(x => x.id === courseId);
+      const b = c?.books.find(x => x.id === bookId);
+      if (!b) return;
+      openConfirmModal('حذف منبع', `آیا کتاب «${escapeHtml(b.title)}» حذف شود؟`, 'حذف منبع', () => {
+        c.books = c.books.filter(x => x.id !== bookId);
+        saveState();
+        showToast('منبع حذف شد', 'info');
+        renderApp();
+      });
+    }
+
+    function confirmLoadFullEESample() {
+      openConfirmModal(
+        'بارگذاری چارت مهندسی برق',
+        'لیست کامل ۷ درس مهندسی برق (ریاضیات مهندسی، معادلات دیفرانسیل، سیگنال و سیستم، اصول سیستم‌های مخابراتی، الکترونیک ۱ و ۲، مدارهای الکتریکی ۱ و ۲) جایگزین دروس فعلی می‌شود. ادامه می‌دهید؟',
+        'بله، بارگذاری شود',
+        () => {
+          state.courses = getFullEESampleCourses();
+          state.dailyLogs = {};
+          roadmapFilterBookId = 'all';
+          saveState();
+          showToast('چارت کامل مهندسی برق بارگذاری شد ⚡', 'success');
+          renderApp();
+        },
+        false
+      );
+    }
+
+    function confirmClearAllCourses() {
+      openConfirmModal('پاکسازی تمام دروس', 'همه دروس و منابع فعلی پاک می‌شوند. مطمئن هستید؟', 'بله، پاک کن', () => {
+        state.courses = [];
+        state.dailyLogs = {};
+        roadmapFilterBookId = 'all';
+        saveState();
+        showToast('تمام دروس پاک شدند', 'info');
+        renderApp();
+      });
+    }
+
+    function confirmClearExams() {
+      openConfirmModal('حذف تمام آزمون‌ها', 'آیا همه آزمون‌های ثبت‌شده حذف شوند؟', 'حذف همه', () => {
+        state.exams = [];
+        saveState();
+        showToast('همه آزمون‌ها حذف شدند', 'info');
+        renderApp();
+      });
+    }
+
+    function confirmResetProgressOnly() {
+      openConfirmModal('صفر کردن پیشرفت‌ها', 'دروس و کتاب‌ها حفظ می‌شوند اما پیشرفت مطالعه تمام کتاب‌ها به صفر برمی‌گردد. ادامه می‌دهید؟', 'صفر کردن پیشرفت', () => {
+        state.courses.forEach(c => c.books.forEach(b => { b.completedUnits = 0; }));
+        state.dailyLogs = {};
+        saveState();
+        showToast('پیشرفت تمام کتاب‌ها صفر شد', 'info');
+        renderApp();
+      });
+    }
+
+    function confirmFullFactoryReset() {
+      openConfirmModal('بازنشانی کامل داده‌ها', 'تمام دروس، آزمون‌ها، پیشرفت‌ها و تنظیمات پاک شده و برنامه به حالت اولیه بازمی‌گردد. مطمئن هستید؟', 'بازنشانی کامل', () => {
+        localStorage.removeItem(STORAGE_KEY);
+        roadmapFilterBookId = 'all';
+        loadState();
+        showToast('برنامه به حالت اولیه بازنشانی شد', 'info');
+        renderApp();
+      });
+    }
+
+    /*************************************************************************
+     * 8. OFFLINE JSON BACKUP EXPORT & IMPORT (WITH JALALI FILENAME)
+     *************************************************************************/
+    function exportBackupJSON() {
+      try {
+        const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `barnameriz-jame-4dor-${getRealTodayJKey()}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        showToast('فایل پشتیبان با تاریخ شمسی دانلود شد', 'success');
+      } catch (err) {
+        showToast('خطا در ایجاد فایل پشتیبان', 'error');
+      }
+    }
+
+    function handleImportFile(event) {
+      const file = event.target.files?.[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const parsed = JSON.parse(e.target.result);
+          if (!parsed || !Array.isArray(parsed.courses) || !parsed.settings?.deadline) {
+            throw new Error('Invalid schema');
+          }
+          const migratedLogs = {};
+          if (parsed.dailyLogs && typeof parsed.dailyLogs === 'object') {
+            for (const k of Object.keys(parsed.dailyLogs)) {
+              migratedLogs[normalizeToJalaliKey(k, getRealTodayJKey())] = parsed.dailyLogs[k];
+            }
+          }
+          state = {
+            settings: {
+              deadline: normalizeToJalaliKey(parsed.settings.deadline, DEFAULT_DEADLINE_JALALI),
+              simulatedDate: parsed.settings.simulatedDate
+                ? normalizeToJalaliKey(parsed.settings.simulatedDate, null)
+                : null
+            },
+            courses: parsed.courses,
+            exams: Array.isArray(parsed.exams)
+              ? parsed.exams.map(ex => ({ ...ex, date: normalizeToJalaliKey(ex.date, getRealTodayJKey()) }))
+              : [],
+            dailyLogs: migratedLogs
+          };
+          saveState();
+          showToast('اطلاعات با موفقیت بازیابی شد ✓', 'success');
+          renderApp();
+        } catch (err) {
+          showToast('فایل انتخاب‌شده معتبر نیست!', 'error');
+        } finally {
+          event.target.value = '';
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    /*************************************************************************
+     * 9. TOASTS, SYSTEM DATE AUTO-DETECTION & BOOTSTRAP
+     *************************************************************************/
+    function showToast(message, type = 'info') {
+      const container = document.getElementById('toast-container');
+      const el = document.createElement('div');
+      el.className = `toast toast-${type}`;
+      el.textContent = message;
+      container.appendChild(el);
+      setTimeout(() => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(-8px)';
+        setTimeout(() => el.remove(), 260);
+      }, 2700);
+    }
+
+    let lastSeenRealDate = getRealTodayJKey();
+
+    window.addEventListener('DOMContentLoaded', () => {
+      loadState();
+      const activeJ = getActiveJKey();
+      const cur = parseJalaliKey(activeJ);
+      calViewYear = cur.jy;
+      calViewMonth = cur.jm;
+      calSelectedDate = activeJ;
+      renderApp();
+
+      // Auto-detect system date change if app stays open past midnight
+      setInterval(() => {
+        const nowReal = getRealTodayJKey();
+        if (nowReal !== lastSeenRealDate) {
+          lastSeenRealDate = nowReal;
+          if (!state.settings.simulatedDate) renderApp();
+        }
+      }, 60000);
+    });
+  </script>
+</body>
+</html>
